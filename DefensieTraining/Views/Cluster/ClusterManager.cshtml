@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "ClusterManager";
+}
+
+<h1>ClusterManager</h1>
+
+<form asp-controller="Cluster" asp-action="LoadClusters" method="post">
+    <button type="submit">Load Clusters</button>
+</form>
+
+<form asp-controller="Cluster" asp-action="CreateCluster" method="post">
+    <button type="submit">Create New Cluster</button>
+</form>
+
+@if (ViewBag.LoadedClusters != null)
+{
+    <p>Clusters loaded successfully!</p>
+}
+
+@if (ViewBag.CreatedCluster != null)
+{
+    <p>New cluster created successfully!</p>
+}
