@@ -26,6 +26,7 @@ namespace Logica.Logica
         public override string GetWarmCoolDown()
         {
             return TrainingWarmupAndCoolingDown;
+            //test
         }
 
         public override string GetMainExercise() { return $"{Meters} meter hardlopen in {Time}."; }
