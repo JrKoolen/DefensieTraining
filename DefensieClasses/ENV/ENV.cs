@@ -10,7 +10,7 @@ namespace Logica.ENV
     {
         public string ConnectionString = "server=localhost;user=root;password=GULAGwarrior1;";
         public string DataBaseName = "DefensieDB";
-        // git ignore122sssss
+        // git ignore122sssssss
         public ENV()
         {
 
