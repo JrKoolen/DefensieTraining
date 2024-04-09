@@ -5,11 +5,11 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frontend", "DefensieTraining\Frontend.csproj", "{A37F3926-8B9F-4F15-944A-BA507646B77F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logica", "DefensieClasses\Logica.csproj", "{6B726886-5BF4-4D05-AB5F-80C01696FE80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "DefensieClasses\Logic.csproj", "{6B726886-5BF4-4D05-AB5F-80C01696FE80}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestsDefensie", "UnitTestsDefensie\UnitTestsDefensie.csproj", "{2A96CC18-B6D7-48B6-B772-9AF383F93273}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dal", "Database\Dal.csproj", "{4CA81C00-8E67-43D6-9A83-7A50A53ACE0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dal", "Database\Dal.csproj", "{4CA81C00-8E67-43D6-9A83-7A50A53ACE0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

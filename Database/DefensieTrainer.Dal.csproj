@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DefensieClasses\Logica.csproj" />
+    <ProjectReference Include="..\DefensieClasses\Logic.csproj" />
     <ProjectReference Include="..\UnitTestsDefensie\UnitTestsDefensie.csproj" />
   </ItemGroup>
 
