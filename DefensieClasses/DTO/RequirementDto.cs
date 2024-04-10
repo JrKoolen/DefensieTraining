@@ -8,10 +8,12 @@ namespace Logica.Dto
 {
     internal class RequirementDto
     {
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public int SortTraining { get; private set; }
-        public int Amount { get; private set; }
-        public int Time { get; private set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get;set; }
+        public int ClusterId { get; set; }
+        public int RequiredSortTraining { get; set; }
+        public int RequiredAmount { get; set; }
+        public int RequiredTimeInSeconds { get; set; }
     }
 }

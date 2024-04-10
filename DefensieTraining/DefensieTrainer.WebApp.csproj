@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Database\Dal.csproj" />
-    <ProjectReference Include="..\DefensieClasses\Logic.csproj" />
+    <ProjectReference Include="..\Database\DefensieTrainer.Dal.csproj" />
+    <ProjectReference Include="..\DefensieClasses\DefensieTrainer.Domain.csproj" />
   </ItemGroup>
 
 
