@@ -3,12 +3,12 @@ using System;
 public class Requirement
 {
     public int Id {  get; set; }
-    public string RequiredName{get; set;}
-    public string RequiredDescription{ get; set;}
+    public string Name{get; set;}
+    public string Description{ get; set;}
     public int ClusterId { get; set;}
-    public int RequiredSortTraining{get; set;}
-    public int RequiredAmount{get; set;}
-    public int RequiredTimeInSeconds{get; set;}
+    public int SortTraining{get; set;}
+    public int Amount{get; set;}
+    public int TimeInSeconds{get; set;}
 
     private static Dictionary<int, (string, int, int)> TrainingDictionary = new Dictionary<int, (string, int, int)>();
     
@@ -16,16 +16,16 @@ public class Requirement
     public Requirement(int id, string name, string description, int clusterId, int sortTraining, int amount, int time)
     {
         this.Id = id;
-        this.RequiredName = name;
-        this.RequiredDescription = description;
+        this.Name = name;
+        this.Description = description;
         this.ClusterId = clusterId;
-        this.RequiredSortTraining = sortTraining;
-        this.RequiredAmount = amount;
-        this.RequiredTimeInSeconds = time;
+        this.SortTraining = sortTraining;
+        this.Amount = amount;
+        this.TimeInSeconds = time;
 
         if (!TrainingDictionary.ContainsKey(sortTraining))
         {
-            TrainingDictionary.Add(sortTraining, (this.RequiredDescription, this.RequiredAmount, this.RequiredTimeInSeconds));
+            TrainingDictionary.Add(sortTraining, (this.Description, this.Amount, this.TimeInSeconds));
         }
         else
         {
@@ -35,7 +35,7 @@ public class Requirement
     
     
     public string GetDetails(){
-        string details = $"name: {RequiredName}, description: {RequiredDescription}, ";
+        string details = $"name: {Name}, description: {Description}, ";
         return details;
     }
     public Requirement? GetRequirement(int sortTraining)
@@ -43,7 +43,7 @@ public class Requirement
         if (TrainingDictionary.ContainsKey(sortTraining))
         {
             var (description, amount, time) = TrainingDictionary[sortTraining];
-            return new Requirement(Id, RequiredName, description, ClusterId, sortTraining, amount, time);
+            return new Requirement(Id, Name, description, ClusterId, sortTraining, amount, time);
         }
         else
         {

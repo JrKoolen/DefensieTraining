@@ -21,10 +21,6 @@ namespace DefensieTraining.Controllers
 
             if (ModelState.IsValid)
             {
-                
-                Requirement requirement = new Requirement(model.Name, model.Description, model.SortTraining, model.Amount, model.Time);
-                DataManager requirementDataAccess = new DataManager();
-                requirementDataAccess.AddRequirement(requirement);
 
                 return RedirectToAction("Index", "Home"); 
             }

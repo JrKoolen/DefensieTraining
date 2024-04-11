@@ -12,8 +12,8 @@ namespace Logica.Dto
         public string Name { get; set; }
         public string Description { get;set; }
         public int ClusterId { get; set; }
-        public int RequiredSortTraining { get; set; }
-        public int RequiredAmount { get; set; }
-        public int RequiredTimeInSeconds { get; set; }
+        public int SortTraining { get; set; }
+        public int Amount { get; set; }
+        public int TimeInSeconds { get; set; }
     }
 }
