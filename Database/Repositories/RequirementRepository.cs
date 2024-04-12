@@ -21,11 +21,11 @@ public class RequirementRepository
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@ClusterId", requirement.ClusterId);
-                command.Parameters.AddWithValue("@RequiredName", requirement.Name);
-                command.Parameters.AddWithValue("@RequiredDescription", requirement.Description);
-                command.Parameters.AddWithValue("@RequiredSortTraining", requirement.SortTraining);
-                command.Parameters.AddWithValue("@RequiredAmount", requirement.Amount);
-                command.Parameters.AddWithValue("@RequiredTimeInSeconds", requirement.TimeInSeconds);
+                command.Parameters.AddWithValue("@RequiredName", requirement.RequiredName);
+                command.Parameters.AddWithValue("@RequiredDescription", requirement.RequiredDescription);
+                command.Parameters.AddWithValue("@RequiredSortTraining", requirement.RequiredSortTraining);
+                command.Parameters.AddWithValue("@RequiredAmount", requirement.RequiredAmount);
+                command.Parameters.AddWithValue("@RequiredTimeInSeconds", requirement.RequiredTimeInSeconds);
                 command.ExecuteNonQuery();
             }
         }
@@ -108,11 +108,11 @@ public class RequirementRepository
             using (var command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@ClusterId", requirement.ClusterId);
-                command.Parameters.AddWithValue("@RequiredName", requirement.Name);
-                command.Parameters.AddWithValue("@RequiredDescription", requirement.Description);
-                command.Parameters.AddWithValue("@RequiredSortTraining", requirement.SortTraining);
-                command.Parameters.AddWithValue("@RequiredAmount", requirement.Amount);
-                command.Parameters.AddWithValue("@RequiredTimeInSeconds", requirement.TimeInSeconds);
+                command.Parameters.AddWithValue("@RequiredName", requirement.RequiredName);
+                command.Parameters.AddWithValue("@RequiredDescription", requirement.RequiredDescription);
+                command.Parameters.AddWithValue("@RequiredSortTraining", requirement.RequiredSortTraining);
+                command.Parameters.AddWithValue("@RequiredAmount", requirement.RequiredAmount);
+                command.Parameters.AddWithValue("@RequiredTimeInSeconds", requirement.RequiredTimeInSeconds);
                 command.Parameters.AddWithValue("@Id", requirement.Id);
                 command.ExecuteNonQuery();
             }
