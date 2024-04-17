@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DefensieTrainer.Domain.Dto;
 
-namespace Logica.Dto
+
+public class RequirementDto
 {
-    internal class RequirementDto
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get;set; }
-        public int ClusterId { get; set; }
-        public int SortTraining { get; set; }
-        public int Amount { get; set; }
-        public int TimeInSeconds { get; set; }
-    }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public int ClusterId { get; set; }
+    public int SortTraining { get; set; }
+    public int Amount { get; set; }
+    public int TimeInSeconds { get; set; }
 }
