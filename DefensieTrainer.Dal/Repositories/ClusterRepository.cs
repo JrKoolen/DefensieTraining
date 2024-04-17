@@ -1,12 +1,7 @@
 ﻿using DefensieTrainer.Domain.IRepositories;
-using Logica.ENV;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DefensieTrainer.Domain.Logica;
 
-namespace Dal.Repositories
+namespace DefensieTrainer.Dal.Repositories
 {
 
     public class ClusterRepository : IClusterRepository

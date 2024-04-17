@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logica.Logica
+namespace DefensieTrainer.Domain.Logica
 {
     internal class ClusterTraining(string name, int sortTraining, int amount, int time, int meters) : Training
     {
@@ -18,7 +18,7 @@ namespace Logica.Logica
         private string TrainingWarmupAndCoolingDown = "5-10 minuten rustig joggen.";
 
 
-        public override string GetTrainingName() 
+        public override string GetTrainingName()
         {
             return Name;
         }

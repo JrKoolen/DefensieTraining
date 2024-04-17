@@ -5,7 +5,7 @@ namespace DefensieTrainer.Services;
 
 public class RequirementServices : IRequirementServices
 {
-    public void ChangeCompany(RequirementDto requirementDto)
+    public void ChangeRequirement(RequirementDto requirementDto)
     {
         throw new NotImplementedException();
     }
@@ -15,12 +15,12 @@ public class RequirementServices : IRequirementServices
         throw new NotImplementedException();
     }
 
-    public void RemoveCompanies(List<int> companyIds)
+    public void RemoveRequirement(List<int> companyIds)
     {
         throw new NotImplementedException();
     }
 
-    public void RemoveCompany(int companyId)
+    public void RemoveRequirement(int companyId)
     {
         throw new NotImplementedException();
     }

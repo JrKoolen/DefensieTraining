@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logica.Logica
+namespace DefensieTrainer.Domain.Logica
 {
     internal class IntervalTraining(string name, int sortTraining, int amount, int time, int meters) : Training
     {
@@ -17,7 +17,7 @@ namespace Logica.Logica
 
         private string TrainingWarmupAndCoolingDown = "5-10 minuten rustig joggen.";
 
-        public override string GetTrainingName() { return Name ; }
+        public override string GetTrainingName() { return Name; }
 
         public override string GetWarmCoolDown() { return TrainingWarmupAndCoolingDown; }
 

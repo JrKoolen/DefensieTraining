@@ -1,5 +1,5 @@
 ﻿using DefensieTrainer.Domain.Dto;
-namespace DefensieTrainer.Services;
+namespace DefensieTrainer.Domain.IServices;
 
 
 public interface IRequirementServices

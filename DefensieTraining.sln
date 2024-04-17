@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.WebApp", "DefensieTraining\DefensieTrainer.WebApp.csproj", "{A37F3926-8B9F-4F15-944A-BA507646B77F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.WebApp", "DefensieTrainer.WebApp\DefensieTrainer.WebApp.csproj", "{A37F3926-8B9F-4F15-944A-BA507646B77F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.Domain", "DefensieClasses\DefensieTrainer.Domain.csproj", "{6B726886-5BF4-4D05-AB5F-80C01696FE80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.Domain", "DefensieTrainer.Domain\DefensieTrainer.Domain.csproj", "{6B726886-5BF4-4D05-AB5F-80C01696FE80}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.UnitTests", "UnitTestsDefensie\DefensieTrainer.UnitTests.csproj", "{2A96CC18-B6D7-48B6-B772-9AF383F93273}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.UnitTests", "DefensieTrainer.UnitTests\DefensieTrainer.UnitTests.csproj", "{2A96CC18-B6D7-48B6-B772-9AF383F93273}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.Dal", "Database\DefensieTrainer.Dal.csproj", "{4CA81C00-8E67-43D6-9A83-7A50A53ACE0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.Dal", "DefensieTrainer.Dal\DefensieTrainer.Dal.csproj", "{4CA81C00-8E67-43D6-9A83-7A50A53ACE0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefensieTrainer.Infrastructure", "DefensieTrainer.Infrastructure\DefensieTrainer.Infrastructure.csproj", "{4C450261-30CF-47B1-B62F-27C518649B63}"
 EndProject
