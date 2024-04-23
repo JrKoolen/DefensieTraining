@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DefensieTrainer.Domain\DefensieTrainer.Domain.csproj" />
-    <ProjectReference Include="..\UnitTestsDefensie\DefensieTrainer.UnitTests.csproj" />
+    <ProjectReference Include="..\DefensieTrainer.UnitTests\DefensieTrainer.UnitTests.csproj" />
   </ItemGroup>
 
 </Project>

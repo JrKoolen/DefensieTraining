@@ -31,6 +31,9 @@ public class Requirement
         }
     }
 
+    public Requirement()
+    {
+    }
 
     public string GetDetails()
     {
