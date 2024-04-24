@@ -1,4 +1,4 @@
-﻿namespace DefensieTrainer.Domain.Dto;
+﻿namespace DefensieTrainer.Domain.DTO.OUT;
 
 
 internal class TrainingDto

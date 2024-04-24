@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+using DefensieTrainer.Domain.DTO.IN;
+using DefensieTrainer.Domain.DTO.OUT;
 
 public class RequirementRepository
 {
@@ -11,7 +13,7 @@ public class RequirementRepository
         _connectionString = connectionString;
     }
 
-    public void CreateRequirement(Requirement requirement)
+    public void CreateRequirement(PostRequirementDto requirement)
     {
         using (var connection = new MySqlConnection(_connectionString))
         {

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DefensieTrainer.Domain.Dto;
 using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.Domain.IRepositories;
+using DefensieTrainer.Domain.DTO.OUT;
+using DefensieTrainer.Domain.DTO.IN;
 
 namespace DefensieTrainer.Domain.Service
 {
@@ -27,7 +28,7 @@ namespace DefensieTrainer.Domain.Service
             };
         }
 
-        public void CreateRequirement(RequirementDto requirementDto)
+        public void CreateRequirement(PostRequirementDto requirementDto)
         {
             throw new NotImplementedException();
         }

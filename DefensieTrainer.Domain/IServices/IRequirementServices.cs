@@ -1,10 +1,11 @@
-﻿using DefensieTrainer.Domain.Dto;
+﻿using DefensieTrainer.Domain.DTO.OUT;
+using DefensieTrainer.Domain.DTO.IN;
 namespace DefensieTrainer.Domain.IServices;
 
 
 public interface IRequirementServices
 {
-    public void CreateRequirement(RequirementDto requirementDto);
+    public void CreateRequirement(PostRequirementDto requirementDto);
 
     public void ChangeRequirement(RequirementDto requirementDto);
 
