@@ -13,6 +13,12 @@ namespace DefensieTrainer.Domain.Service
     internal class RequirementService : IRequirementServices
     {
         private readonly IRequirementRepository _requirementRepository;
+
+        public RequirementService(IRequirementRepository requirementRepository)
+        {
+            _requirementRepository = requirementRepository;
+        }
+    
         public void ChangeRequirement(RequirementDto requirementDto)
         {
             Requirement requirement = new() 
