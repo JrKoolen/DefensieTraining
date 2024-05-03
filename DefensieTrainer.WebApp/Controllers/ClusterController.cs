@@ -5,15 +5,11 @@ using DefensieTrainer.Domain.DTO.IN;
 
 namespace DefensieTraining.Controllers
 {
-    public class RequirementController : Controller
+    public class ClusterController: Controller
     {
         readonly TrainingManager TrainingManager = new();
         private readonly IRequirementServices _requirementService;
 
-        public RequirementController(IRequirementServices requirementService)
-        {
-            _requirementService = requirementService;
-        }
 
         public IActionResult ClusterManager()
         {
@@ -27,8 +23,8 @@ namespace DefensieTraining.Controllers
 
             if (ModelState.IsValid)
             {
-               _requirementService.CreateRequirement(model.ToDto());
-                return RedirectToAction("Index", "Home"); 
+                _requirementService.CreateRequirement(model.ToDto());
+                return RedirectToAction("Index", "Home");
             }
             return View(model);
         }
