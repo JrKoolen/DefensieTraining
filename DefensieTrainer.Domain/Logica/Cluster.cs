@@ -2,17 +2,20 @@ using System;
 
 public class Cluster
 {
-    private int ClusterLevel{get; set;}
-    private string Description{get; set;}
-    private List<Requirement> Requirements = new List<Requirement>();
+    public int ClusterLevel{get; set;}
+    public string Description{get; set;}
+    public List<Requirement> Requirements = new List<Requirement>();
 
-
-
-    public Cluster(int level, string description, List<Requirement> requirements)
+    public Cluster(int clusterlevel, string description, List<Requirement> requirements)
     {
-        ClusterLevel = level;
+        ClusterLevel = clusterlevel;
         this.Description = description;
         this.Requirements = requirements;
+    }
+
+    public Cluster()
+    {
+
     }
     public void AddRequirement(Requirement requirement)
     {

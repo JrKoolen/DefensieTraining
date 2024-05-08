@@ -3,7 +3,7 @@ public class Requirement
     public int Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public int ClusterId { get; set; }
+    public int? ClusterId { get; set; }
     public int SortTraining { get; set; }
     public int Amount { get; set; }
     public int TimeInSeconds { get; set; }
@@ -11,7 +11,7 @@ public class Requirement
     private static Dictionary<int, (string, int, int)> TrainingDictionary = new Dictionary<int, (string, int, int)>();
 
 
-    public Requirement(int id, string name, string description, int clusterId, int sortTraining, int amount, int time)
+    public Requirement(int id, string name, string description, int? clusterId, int sortTraining, int amount, int time)
     {
         this.Id = id;
         this.Name = name;
@@ -40,7 +40,7 @@ public class Requirement
         string details = $"name: {Name}, description: {Description}, ";
         return details;
     }
-    public Requirement? GetRequirement(int sortTraining)
+    public Requirement GetRequirement(int sortTraining)
     {
         if (TrainingDictionary.ContainsKey(sortTraining))
         {

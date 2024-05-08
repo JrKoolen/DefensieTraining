@@ -1,11 +1,12 @@
 ﻿namespace DefensieTrainer.Domain.DTO.OUT;
 
 
-internal class ClusterDto
+public class ClusterDto
 {
-    private int ClusterLevel { get; set; }
-    private string Description { get; set; }
+    public int Id { get; set; }
+    public int ClusterLevel { get; set; }
+    public string Description { get; set; }
 
-    private List<Requirement> Requirements = new List<Requirement>();
+    public List<Requirement> Requirements = new List<Requirement>();
 }
 

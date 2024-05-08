@@ -10,9 +10,9 @@ using DefensieTrainer.Domain.DTO.IN;
 
 namespace DefensieTrainer.Domain.Service
 {
-    internal class RequirementService : IRequirementServices
+    public class RequirementService : IRequirementServices
     {
-        private readonly IRequirementRepository _requirementRepository;
+        public readonly IRequirementRepository _requirementRepository;
 
         public RequirementService(IRequirementRepository requirementRepository)
         {
@@ -36,7 +36,17 @@ namespace DefensieTrainer.Domain.Service
 
         public void CreateRequirement(PostRequirementDto requirementDto)
         {
-            throw new NotImplementedException();
+            Requirement requirement = new Requirement
+            {
+                ClusterId = requirementDto.ClusterId,
+                Name = requirementDto.Name,
+                Description = requirementDto.Description,
+                SortTraining = requirementDto.SortTraining,
+                Amount = requirementDto.Amount,
+                TimeInSeconds = requirementDto.TimeInSeconds
+            };
+
+            _requirementRepository.CreateRequirement(requirement);
         }
 
         public void RemoveRequirement(int companyId)

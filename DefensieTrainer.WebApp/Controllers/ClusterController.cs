@@ -5,11 +5,16 @@ using DefensieTrainer.Domain.DTO.IN;
 
 namespace DefensieTraining.Controllers
 {
-    public class ClusterController: Controller
+    public class ClusterController : Controller
     {
-        readonly TrainingManager TrainingManager = new();
+        private readonly TrainingManager TrainingManager = new();
         private readonly IRequirementServices _requirementService;
 
+        // Constructor injection to inject IRequirementServices
+        public ClusterController(IRequirementServices requirementService)
+        {
+            _requirementService = requirementService;
+        }
 
         public IActionResult ClusterManager()
         {
@@ -20,7 +25,6 @@ namespace DefensieTraining.Controllers
         {
             model.SortTrainingOptions = TrainingManager.GetTrainingOptions();
 
-
             if (ModelState.IsValid)
             {
                 _requirementService.CreateRequirement(model.ToDto());
@@ -28,10 +32,10 @@ namespace DefensieTraining.Controllers
             }
             return View(model);
         }
+
         public IActionResult ViewCluster()
         {
             return View();
         }
-
     }
 }

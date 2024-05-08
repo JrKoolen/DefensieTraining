@@ -1,4 +1,6 @@
-﻿@{
+﻿@model DefensieTrainer.WebApp.Models.ClusterViewModel
+
+@{
     ViewData["Title"] = "ClusterManager";
 }
 
@@ -9,7 +11,18 @@
 </form>
 
 <form asp-controller="Cluster" asp-action="CreateCluster" method="post">
-    <button type="submit">Create New Cluster</button>
+    <h2>Create New Cluster</h2>
+    <div class="form-group">
+        <label for="ClusterLevel">Cluster Level:</label>
+        <input type="number" id="ClusterLevel" name="ClusterLevel" class="form-control" />
+        <span asp-validation-for="ClusterLevel" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Description">Description:</label>
+        <input type="text" id="Description" name="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Cluster</button>
 </form>
 
 @if (ViewBag.LoadedClusters != null)

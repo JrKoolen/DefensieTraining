@@ -22,7 +22,8 @@ public class ConfigurationProvider : IConfiguration
 
     public string GetConnectionString()
     {
-        return _configuration.GetConnectionString("DefaultConnection");
+        string conn = _configuration["DbQuery"];
+        return conn;
     }
 
     public IChangeToken GetReloadToken()
