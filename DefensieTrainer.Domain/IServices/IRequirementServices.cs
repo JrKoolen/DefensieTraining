@@ -13,4 +13,6 @@ public interface IRequirementServices
     public void RemoveRequirement(int companyId);
 
     public void RemoveRequirement(List<int> companyIds);
+
+    public List<Requirement> GetAllRequirements();
 }

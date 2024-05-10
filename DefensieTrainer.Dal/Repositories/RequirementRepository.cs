@@ -15,17 +15,20 @@ public class RequirementRepository : IRequirementRepository
     }
 
 
-    public void CreateCluster(Cluster cluster)
+    public void CreateRequirement(Requirement requirement)
     {
         using (var connection = new MySqlConnection(_connectionString))
         {
             connection.Open();
-            string query = @"INSERT INTO Cluster (ClusterLevel, Description)
-                                 VALUES (@ClusterLevel, @Description)";
+            string query = @"INSERT INTO Requirement (Cluster_id, Name, Description, SortTraining, TimeInSeconds)
+                         VALUES (@ClusterId, @Name, @Description, @SortTraining, @TimeInSeconds)";
             using (var command = new MySqlCommand(query, connection))
             {
-                command.Parameters.AddWithValue("@ClusterLevel", cluster.ClusterLevel);
-                command.Parameters.AddWithValue("@Description", cluster.Description);
+                command.Parameters.AddWithValue("@ClusterId", requirement.ClusterId);
+                command.Parameters.AddWithValue("@Name", requirement.Name);
+                command.Parameters.AddWithValue("@Description", requirement.Description);
+                command.Parameters.AddWithValue("@SortTraining", requirement.SortTraining);
+                command.Parameters.AddWithValue("@TimeInSeconds", requirement.TimeInSeconds);
                 command.ExecuteNonQuery();
             }
         }
@@ -62,6 +65,40 @@ public class RequirementRepository : IRequirementRepository
             }
         }
     }
+
+    public List<RequirementDto> GetAllRequirements()
+    {
+        List<RequirementDto> requirements = new List<RequirementDto>();
+
+        using (var connection = new MySqlConnection(_connectionString))
+        {
+            connection.Open();
+            string query = "SELECT * FROM Requirement";
+            using (var command = new MySqlCommand(query, connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        RequirementDto requirement = new RequirementDto
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
+                            Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString(),
+                            ClusterId = reader["Cluster_id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Cluster_id"]),
+                            SortTraining = reader["SortTraining"] == DBNull.Value ? 0 : Convert.ToInt32(reader["SortTraining"]),
+                            Amount = reader["Amount"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Amount"]),
+                            TimeInSeconds = reader["TimeInSeconds"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TimeInSeconds"])
+                        };
+                        requirements.Add(requirement);
+                    }
+                }
+            }
+        }
+
+        return requirements;
+    }
+
 
     public Requirement GetById(int id)
     {
@@ -118,4 +155,5 @@ public class RequirementRepository : IRequirementRepository
             }
         }
     }
+
 }

@@ -1,4 +1,6 @@
-﻿namespace DefensieTrainer.Domain.IRepositories
+﻿using DefensieTrainer.Domain.DTO.IN;
+using DefensieTrainer.Domain.DTO.OUT;
+namespace DefensieTrainer.Domain.IRepositories
 {
     public interface IRequirementRepository
     {
@@ -11,5 +13,8 @@
         void DeleteRequirement(int id);
 
         void DeleteRequirements(int[] id);
+
+        List<RequirementDto> GetAllRequirements();
+
     }
 }

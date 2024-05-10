@@ -1,4 +1,7 @@
-﻿namespace DefensieTrainer.Domain.DTO.IN
+﻿using DefensieTrainer.Domain.DTO.OUT;
+
+namespace DefensieTrainer.Domain.DTO.IN
+
 {
     public class PostClusterDto
     {

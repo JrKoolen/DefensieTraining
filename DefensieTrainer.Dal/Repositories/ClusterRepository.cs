@@ -96,7 +96,7 @@ namespace DefensieTrainer.Dal.Repositories
                                 Description = reader["Description"].ToString()
                             };
                         }
-                        return null; // If no cluster found with the given id
+                        return null; 
                     }
                 }
             }

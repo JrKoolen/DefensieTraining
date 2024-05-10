@@ -27,6 +27,7 @@ namespace DefensieTrainer.Domain.Service
                 Description = clusterDto.Description,
                 Requirements = clusterDto.Requirements,
             };
+            _clusterRepository.CreateCluster(cluster);
         }
 
         public void RemoveCluster(int companyId)

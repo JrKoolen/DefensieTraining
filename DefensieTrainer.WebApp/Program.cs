@@ -1,3 +1,4 @@
+using DefensieTrainer.Dal.Repositories;
 using DefensieTrainer.Domain.IRepositories;
 using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.Domain.Service;
@@ -11,6 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRequirementServices, RequirementService>();
 builder.Services.AddScoped<IRequirementRepository, RequirementRepository>();
+
+builder.Services.AddScoped<IClusterService, ClusterService>();
+builder.Services.AddScoped<IClusterRepository, ClusterRepository>();
 
 var connectionString = config.GetConnectionString();
 builder.Services.AddSingleton(connectionString);

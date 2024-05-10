@@ -2,24 +2,23 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.Domain.DTO.IN;
+using DefensieTrainer.WebApp.Models;
 
 namespace DefensieTraining.Controllers
 {
     public class ClusterController : Controller
     {
+        private readonly IClusterService _clusterService;
         private readonly TrainingManager TrainingManager = new();
         private readonly IRequirementServices _requirementService;
 
-        // Constructor injection to inject IRequirementServices
-        public ClusterController(IRequirementServices requirementService)
+
+        public ClusterController(IClusterService clusterService, IRequirementServices requirementService)
         {
+            _clusterService = clusterService;
             _requirementService = requirementService;
         }
 
-        public IActionResult ClusterManager()
-        {
-            return View();
-        }
 
         public IActionResult CreateRequirement(RequirementViewModel model)
         {
@@ -33,9 +32,22 @@ namespace DefensieTraining.Controllers
             return View(model);
         }
 
-        public IActionResult ViewCluster()
+        public IActionResult CreateCluster(ClusterViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                _clusterService.CreateCluster(model.ToDto());
+                ViewBag.CreatedCluster = true;
+            }
+            return RedirectToAction("ClusterManager");
+        }
+
+
+        public IActionResult ClusterManager()
+        {
+            var viewModel = new ClusterViewModel();
+            viewModel.Requirements = _requirementService.GetAllRequirements();
+            return View(viewModel);
         }
     }
 }

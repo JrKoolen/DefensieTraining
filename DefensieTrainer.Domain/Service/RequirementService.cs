@@ -49,6 +49,27 @@ namespace DefensieTrainer.Domain.Service
             _requirementRepository.CreateRequirement(requirement);
         }
 
+        public List<Requirement> GetAllRequirements()
+        {
+            List<Requirement> requirements = new List<Requirement>();
+
+            foreach (var requirementDto in _requirementRepository.GetAllRequirements())
+            {
+                Requirement requirement = new Requirement
+                {
+                    ClusterId = requirementDto.ClusterId,
+                    Name = requirementDto.Name,
+                    Description = requirementDto.Description,
+                    SortTraining = requirementDto.SortTraining,
+                    Amount = requirementDto.Amount,
+                    TimeInSeconds = requirementDto.TimeInSeconds
+                };
+
+                requirements.Add(requirement);
+            }
+            return requirements;
+        }
+
         public void RemoveRequirement(int companyId)
         {
             throw new NotImplementedException();
