@@ -6,7 +6,7 @@ namespace DefensieTrainer.Domain.IRepositories
 {
     public interface IUserRepository
     {
-        User GetById(int id);
+        UserDto GetById(int id);
 
         void CreateUser(PostUserDto User);
 
