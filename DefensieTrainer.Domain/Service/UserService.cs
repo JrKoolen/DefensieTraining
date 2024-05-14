@@ -16,7 +16,7 @@ namespace DefensieTrainer.Domain.Service
 
         public void CreateUser(PostUserDto userInput)
         {
-            throw new NotImplementedException();
+            _UserRepository.CreateUser(userInput);
         }
 
         public void DeleteUser(int userId)
