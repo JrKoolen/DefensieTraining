@@ -8,11 +8,13 @@ namespace DefensieTrainer.Domain.IRepositories
 
         void CreateCluster(Cluster cluster);
 
-        void UpdateCluster(ClusterDto cluster);
+        void UpdateCluster(PostClusterDto postclusterdDto);
 
         void DeleteCluster(int id);
 
         void DeleteCluster(int[] id);
+
+        public List<ClusterDto> GetAllClusters();
 
     }
 }

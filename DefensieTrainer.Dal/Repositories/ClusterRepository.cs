@@ -2,6 +2,7 @@
 using DefensieTrainer.Domain.IRepositories;
 using DefensieTrainer.Domain.DTO.IN;
 using DefensieTrainer.Domain.DTO.OUT;
+using System.Diagnostics.Metrics;
 
 namespace DefensieTrainer.Dal.Repositories
 {
@@ -19,13 +20,35 @@ namespace DefensieTrainer.Dal.Repositories
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = @"INSERT INTO Cluster (ClusterLevel, Description)
-                                 VALUES (@ClusterLevel, @Description)";
-                using (var command = new MySqlCommand(query, connection))
+
+                // Insert cluster data into the Cluster table
+                string insertClusterQuery = @"INSERT INTO Cluster (ClusterLevel, Description)
+                                     VALUES (@ClusterLevel, @Description);
+                                     SELECT LAST_INSERT_ID();"; 
+
+                using (var insertClusterCommand = new MySqlCommand(insertClusterQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@ClusterLevel", cluster.ClusterLevel);
-                    command.Parameters.AddWithValue("@Description", cluster.Description);
-                    command.ExecuteNonQuery();
+                    insertClusterCommand.Parameters.AddWithValue("@ClusterLevel", cluster.ClusterLevel);
+                    insertClusterCommand.Parameters.AddWithValue("@Description", cluster.Description);
+
+                    int latestClusterId = Convert.ToInt32(insertClusterCommand.ExecuteScalar());
+
+                    // Insert requirements associated with the cluster
+                    string insertRequirementsQuery = @"INSERT INTO Requirement (Cluster_id, Name, Description, SortTraining, TimeInSeconds)
+                                               VALUES (@ClusterId, @Name, @Description, @SortTraining, @TimeInSeconds)";
+
+                    foreach (Requirement requirement in cluster.Requirements)
+                    {
+                        using (var insertRequirementCommand = new MySqlCommand(insertRequirementsQuery, connection))
+                        {
+                            insertRequirementCommand.Parameters.AddWithValue("@ClusterId", latestClusterId);
+                            insertRequirementCommand.Parameters.AddWithValue("@Name", requirement.Name);
+                            insertRequirementCommand.Parameters.AddWithValue("@Description", requirement.Description);
+                            insertRequirementCommand.Parameters.AddWithValue("@SortTraining", requirement.SortTraining);
+                            insertRequirementCommand.Parameters.AddWithValue("@TimeInSeconds", requirement.TimeInSeconds);
+                            insertRequirementCommand.ExecuteNonQuery();
+                        }
+                    }
                 }
             }
         }
@@ -46,7 +69,42 @@ namespace DefensieTrainer.Dal.Repositories
 
         public void DeleteCluster(int[] id)
         {
-            throw new NotImplementedException();
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "DELETE FROM Cluster WHERE Id = @Id";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public List<ClusterDto> GetAllClusters()
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Cluster";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        var clusters = new List<ClusterDto>();
+                        while (reader.Read())
+                        {
+                            clusters.Add(new ClusterDto
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                ClusterLevel = Convert.ToInt32(reader["ClusterLevel"]),
+                                Description = reader["Description"].ToString()
+                            });
+                        }
+                        return clusters;
+                    }
+                }
+            }
         }
 
         public List<ClusterDto> GetByClusterIds(int clusterId)
@@ -96,29 +154,32 @@ namespace DefensieTrainer.Dal.Repositories
                                 Description = reader["Description"].ToString()
                             };
                         }
-                        return null; 
+                        return null;
                     }
                 }
             }
         }
 
-        public void UpdateCluster(ClusterDto cluster)
+        public void UpdateCluster(PostClusterDto cluster)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = @"UPDATE Cluster 
-                                 SET ClusterLevel = @ClusterLevel, 
-                                     Description = @Description 
-                                 WHERE Id = @Id";
+                string query = @"UPDATE Cluster
+                         SET ClusterLevel = @ClusterLevel, 
+                             Description = @Description 
+                         WHERE Id = @Id";
+
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ClusterLevel", cluster.ClusterLevel);
                     command.Parameters.AddWithValue("@Description", cluster.Description);
-                    command.Parameters.AddWithValue("@Id", cluster.Id);
+                    //command.Parameters.AddWithValue("@Id", cluster.Id);
                     command.ExecuteNonQuery();
                 }
             }
         }
+
+
     }
 }

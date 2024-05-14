@@ -1,7 +1,7 @@
 ﻿using DefensieTrainer.Domain.IRepositories;
 namespace DefensieTrainer.Dal.Repositories
 {
-    public class UserRepository : IUserInterFace
+    public class UserRepository : IUserRepository
     {
     }
 }

@@ -6,9 +6,40 @@
 
 <h1>ClusterManager</h1>
 
-<form asp-controller="Cluster" asp-action="LoadClusters" method="post">
-    <button type="submit">Load Clusters</button>
+<h2>Clusters</h2>
+
+<form asp-controller="Cluster" asp-action="SaveClusters" method="post">
+    <ul>
+        @if (Model.Clusters != null && Model.Clusters.Any())
+        {
+            @foreach (var cluster in Model.Clusters)
+            {
+                <li>
+                    <input type="hidden" name="Clusters[@cluster.Id].Id" value="@cluster.Id" />
+                    <label for="ClusterLevel">Cluster Level:</label>
+                    <input type="number" id="ClusterLevel" name="Clusters[@cluster.Id].ClusterLevel" value="@cluster.ClusterLevel" />
+                    <label for="Description">Description:</label>
+                    <input type="text" id="Description" name="Clusters[@cluster.Id].Description" value="@cluster.Description" />
+
+                    @foreach (var requirement in cluster.Requirements)
+                    {
+                    <li>
+                        <input type="hidden" name="Clusters[@cluster.Id].Requirements[@requirement.Id].Id" value="@requirement.Id" />
+                        <label for="RequirementName">Name:</label>
+                        <input type="text" id="RequirementName" name="Clusters[@cluster.Id].Requirements[@requirement.Id].Name" value="@requirement.Name" />
+                    </li>
+                    }
+                </li>
+            }
+        }
+        else
+        {
+            <li>No clusters found</li>
+        }
+    </ul>
+    <button type="submit">Save</button>
 </form>
+
 
 <form asp-controller="Cluster" asp-action="CreateCluster" method="post">
     <h2>Create New Cluster</h2>

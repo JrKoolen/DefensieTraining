@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DefensieTrainer.Domain.IServices;
+﻿using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.Domain.IRepositories;
 using DefensieTrainer.Domain.DTO.OUT;
 using DefensieTrainer.Domain.DTO.IN;

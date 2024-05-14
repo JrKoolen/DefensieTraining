@@ -1,6 +1,4 @@
 ﻿namespace DefensieTrainer.Domain.DTO.IN;
-
-
 public class PostRequirementDto
 {
     public string? Name { get; set; }

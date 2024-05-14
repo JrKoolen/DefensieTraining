@@ -8,7 +8,6 @@ ConfigurationProvider config = new ConfigurationProvider();
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRequirementServices, RequirementService>();
 builder.Services.AddScoped<IRequirementRepository, RequirementRepository>();
@@ -34,6 +33,11 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "register",
+    pattern: "Account/Register",
+    defaults: new { controller = "Register", action = "Register" });
 
 app.MapControllerRoute(
     name: "default",
