@@ -14,19 +14,17 @@ namespace DefensieTrainer.Dal.Repositories
         {
             _connectionString = connectionString;
         }
-
+        //TO DO  CHANGE THIS  QUERY
         public void CreateCluster(Cluster cluster)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
-
-                // Insert cluster data into the Cluster table
-                string insertClusterQuery = @"INSERT INTO Cluster (ClusterLevel, Description)
+                string Query = @"INSERT INTO Cluster (ClusterLevel, Description)
                                      VALUES (@ClusterLevel, @Description);
                                      SELECT LAST_INSERT_ID();"; 
 
-                using (var insertClusterCommand = new MySqlCommand(insertClusterQuery, connection))
+                using (var insertClusterCommand = new MySqlCommand(Query, connection))
                 {
                     insertClusterCommand.Parameters.AddWithValue("@ClusterLevel", cluster.ClusterLevel);
                     insertClusterCommand.Parameters.AddWithValue("@Description", cluster.Description);

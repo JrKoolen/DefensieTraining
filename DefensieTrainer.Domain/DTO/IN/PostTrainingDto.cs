@@ -1,8 +1,13 @@
-﻿namespace DefensieTrainer.Domain.DTO.OUT 
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DefensieTrainer.Domain.DTO.IN
 {
-    public class TrainingDto
+    public class PostTrainingDto
     {
-        public int Id { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
         public int? ClusterId { get; set; }
@@ -12,6 +17,6 @@
         public int Meters { get; set; }
         public DateTime DateTime { get; set; }
         public int PersonId { get; set; }
+
     }
 }
-
