@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DefensieTrainer.Domain.DTO.IN;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 
 namespace DefensieTrainer.WebApp.Models
 {
-    public class CreateUserViewModel
+    public class RegisterViewModel
     {
         public int? Id { get; set; }
         [Required]
@@ -24,5 +25,20 @@ namespace DefensieTrainer.WebApp.Models
         public DateTime ArrivalDate { get; set; }
         [Required]
         public string ArmedForce { get; set; }
+
+        public PostUserDto ToPostDto()
+        {
+            return new PostUserDto
+            {
+                Name = this.Name,
+                LastName = this.LastName,
+                Weight = this.Weight,
+                Length = this.Length,
+                Email = this.Email,
+                Password = this.Password,
+                ArrivalDate = this.ArrivalDate,
+                ArmedForce = this.ArmedForce,
+            };
+        }
     }
 }

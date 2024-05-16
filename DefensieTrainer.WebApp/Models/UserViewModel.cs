@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
+using DefensieTrainer.Domain.DTO.IN;
 
 namespace DefensieTrainer.WebApp.Models
 {
@@ -18,5 +19,18 @@ namespace DefensieTrainer.WebApp.Models
         public DateTime ArrivalDate { get; set; }
         [Required]
         public string ArmedForce { get; set; }
+
+        public  PostUserDto ToPostDto()
+        {
+            return new PostUserDto
+            {
+                Name = this.Name,
+                LastName = this.LastName,
+                Weight = this.Weight,
+                Length = this.Length,
+                ArrivalDate = this.ArrivalDate,
+                ArmedForce = this.ArmedForce,
+            };
+        }
     }
 }
