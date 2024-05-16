@@ -15,6 +15,9 @@ builder.Services.AddScoped<IRequirementRepository, RequirementRepository>();
 builder.Services.AddScoped<IClusterService, ClusterService>();
 builder.Services.AddScoped<IClusterRepository, ClusterRepository>();
 
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserServices, UserService>();
+
 var connectionString = config.GetConnectionString();
 builder.Services.AddSingleton(connectionString);
 
