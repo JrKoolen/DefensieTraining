@@ -4,9 +4,50 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DefensieTraining</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DefensieTraining.styles.css" asp-append-version="true" />
+    <style>
+        /* Increase the height of the navbar */
+        .navbar {
+            height: 80px; /* Adjust this value as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        /* Center the navbar content */
+        .navbar .navbar-collapse {
+            justify-content: center;
+        }
+
+        /* Increase the font size of the navbar brand and links */
+        .navbar-brand, .nav-link {
+            font-size: 1.5em; /* Adjust this value as needed */
+        }
+
+        /* Ensure navbar items are centered */
+        .navbar-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Center the items within each nav-item */
+        .nav-item {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Adjust padding for nav links to center them better vertically */
+        .nav-link {
+            padding: 0 15px; /* Adjust as needed */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,12 +60,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cluster" asp-action="ClusterManager">Cluster Manager</a>
                         </li>

@@ -1,22 +1,30 @@
-html {
-  font-size: 14px;
+/* Header background color */
+header nav.navbar {
+    background-color: #002060 !important; /* Example color */
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    /* Navbar text color */
+    header nav.navbar .nav-link {
+        color: #ffffff !important; /* Example color */
+    }
+
+        /* Change color on hover */
+        header nav.navbar .nav-link:hover {
+            color: #cce6ff !important; /* Example hover color */
+        }
+
+/* Footer background color */
+footer.footer {
+    background-color: #002060 !important; /* Example color */
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+    /* Footer text color */
+    footer.footer .text-muted {
+        color: #ffffff !important; /* Example color */
+    }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
+.page-title {
+    color: white; /* Set the text color to white */
+    font-size: 1.5rem; /* Example font size */
+    font-weight: bold; /* Example font weight */
 }
