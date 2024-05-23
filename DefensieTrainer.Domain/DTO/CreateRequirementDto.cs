@@ -1,5 +1,5 @@
-﻿namespace DefensieTrainer.Domain.DTO.IN;
-public class PostRequirementDto
+﻿namespace DefensieTrainer.Domain.DTO;
+public class CreateRequirementDto
 {
     public string? Name { get; set; }
     public string? Description { get; set; }

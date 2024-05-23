@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
+using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IRepositories;
 
 public class RequirementRepository : IRequirementRepository

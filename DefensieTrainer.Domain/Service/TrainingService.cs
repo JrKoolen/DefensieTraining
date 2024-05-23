@@ -1,5 +1,4 @@
-﻿using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
+﻿using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IRepositories;
 using DefensieTrainer.Domain.IServices;
 
@@ -14,7 +13,7 @@ namespace DefensieTrainer.Services
             _trainingRepository = trainingRepository;
         }
 
-        public void AddNewTraining(PostTrainingDto training)
+        public void AddNewTraining(CreateTrainingDto training)
         {
             _trainingRepository.AddNewTraining(training);
         }

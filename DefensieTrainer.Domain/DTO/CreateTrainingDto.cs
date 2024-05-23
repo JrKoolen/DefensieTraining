@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DefensieTrainer.Domain.DTO.IN
+namespace DefensieTrainer.Domain.DTO
 {
-    public class PostTrainingDto
+    public class CreateTrainingDto
     {
         public string? Name { get; set; }
         public string? Description { get; set; }

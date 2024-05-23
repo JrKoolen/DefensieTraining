@@ -1,7 +1,6 @@
 ﻿using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.Domain.IRepositories;
-using DefensieTrainer.Domain.DTO.OUT;
-using DefensieTrainer.Domain.DTO.IN;
+using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.Domain.Service
 {
@@ -14,12 +13,12 @@ namespace DefensieTrainer.Domain.Service
             _clusterRepository = clusterRepository;
         }
 
-        public void ChangeCluster(PostClusterDto postClustertDto)
+        public void ChangeCluster(CreateClusterDto postClustertDto)
         {
             _clusterRepository.UpdateCluster(postClustertDto);
         }
 
-        public void CreateCluster(PostClusterDto clusterDto)
+        public void CreateCluster(CreateClusterDto clusterDto)
         {
             Cluster cluster = new Cluster()
             {

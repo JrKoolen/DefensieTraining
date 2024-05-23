@@ -1,7 +1,6 @@
 ﻿using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.Domain.IRepositories;
-using DefensieTrainer.Domain.DTO.OUT;
-using DefensieTrainer.Domain.DTO.IN;
+using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.Domain.Service
 {
@@ -14,7 +13,7 @@ namespace DefensieTrainer.Domain.Service
             _UserRepository = UserRepository;
         }
 
-        public void CreateUser(PostUserDto userInput)
+        public void CreateUser(CreateUserDto userInput)
         {
             _UserRepository.CreateUser(userInput);
         }
@@ -34,7 +33,7 @@ namespace DefensieTrainer.Domain.Service
             throw new NotImplementedException();
         }
 
-        public void UpdateUser(int userId, PostUserDto userInput)
+        public void UpdateUser(int userId, CreateUserDto userInput)
         {
             throw new NotImplementedException();
         }

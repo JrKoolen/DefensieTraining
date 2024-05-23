@@ -1,5 +1,4 @@
-﻿using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
+﻿using DefensieTrainer.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace DefensieTrainer.Domain.IServices
 {
     public interface ITrainingService
     {
-        void AddNewTraining(PostTrainingDto training);
+        void AddNewTraining(CreateTrainingDto training);
         void DeleteTraining(int trainingId);
         List<TrainingDto> GetAllTrainings();
         TrainingDto GetTrainingById(int trainingId);

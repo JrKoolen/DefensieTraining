@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
+using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IRepositories;
 using DefensieTrainer.Domain.Logica;
 using MySql.Data.MySqlClient;
@@ -17,7 +16,7 @@ namespace DefensieTrainer.Dal.Repositories
             _connectionString = connectionString;
         }
 
-        public void CreateUser(PostUserDto user)
+        public void CreateUser(CreateUserDto user)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -141,7 +140,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public void UpdateUser(PostUserDto user)
+        public void UpdateUser(CreateUserDto user)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {

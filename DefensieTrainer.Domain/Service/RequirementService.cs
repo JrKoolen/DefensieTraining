@@ -1,7 +1,6 @@
 ﻿using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.Domain.IRepositories;
-using DefensieTrainer.Domain.DTO.OUT;
-using DefensieTrainer.Domain.DTO.IN;
+using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.Domain.Service
 {
@@ -29,7 +28,7 @@ namespace DefensieTrainer.Domain.Service
             };
         }
 
-        public void CreateRequirement(PostRequirementDto requirementDto)
+        public void CreateRequirement(CreateRequirementDto requirementDto)
         {
             Requirement requirement = new Requirement
             {

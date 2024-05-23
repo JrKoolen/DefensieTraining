@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using DefensieTrainer.Domain.DTO.IN;
+using DefensieTrainer.Domain.DTO;
 
 public class RequirementViewModel
 {
@@ -23,9 +23,9 @@ public class RequirementViewModel
 
     public List<SelectListItem>? SortTrainingOptions { get; set; }
 
-    public PostRequirementDto ToDto()
+    public CreateRequirementDto ToDto()
     {
-        return new PostRequirementDto
+        return new CreateRequirementDto
         {
             Name = this.Name,
             Description = this.Description,

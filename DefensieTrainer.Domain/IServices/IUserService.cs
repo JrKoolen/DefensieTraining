@@ -1,5 +1,4 @@
-﻿using DefensieTrainer.Domain.DTO.OUT;
-using DefensieTrainer.Domain.DTO.IN;
+﻿using DefensieTrainer.Domain.DTO;
 
 
 namespace DefensieTrainer.Domain.IServices
@@ -8,8 +7,8 @@ namespace DefensieTrainer.Domain.IServices
     {
         UserDto GetUserById(int userId);
         IEnumerable<UserDto> GetAllUsers();
-        void CreateUser(PostUserDto userInput);
-        void UpdateUser(int userId, PostUserDto userInput);
+        void CreateUser(CreateUserDto userInput);
+        void UpdateUser(int userId, CreateUserDto userInput);
         void DeleteUser(int userId);
     }
 }

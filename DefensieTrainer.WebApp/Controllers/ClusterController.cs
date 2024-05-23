@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DefensieTrainer.Domain.IServices;
-using DefensieTrainer.Domain.DTO.IN;
 using DefensieTrainer.WebApp.Models;
+using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTraining.Controllers
 {
@@ -71,7 +71,7 @@ namespace DefensieTraining.Controllers
                 var clustersEntry = ModelState["Clusters"];
 
                 // Check if the entry for "Clusters" exists and is of the correct type
-                if (clustersEntry != null && clustersEntry.RawValue is List<PostClusterDto> clusters)
+                if (clustersEntry != null && clustersEntry.RawValue is List<CreateClusterDto> clusters)
                 {
                     // Loop through each cluster and call the ChangeCluster method
                     foreach (var cluster in clusters)

@@ -1,8 +1,12 @@
-﻿namespace DefensieTrainer.Domain.DTO.IN;
-public class PostClusterDto
+﻿namespace DefensieTrainer.Domain.DTO;
+
+
+public class ClusterDto
 {
-    public int? Id { get; set; }
+    public int Id { get; set; }
     public int ClusterLevel { get; set; }
     public string Description { get; set; }
+
     public List<Requirement> Requirements = new List<Requirement>();
 }
+

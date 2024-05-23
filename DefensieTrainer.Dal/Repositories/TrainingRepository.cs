@@ -1,5 +1,4 @@
-﻿using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
+﻿using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IRepositories;
 using MySql.Data.MySqlClient;
 
@@ -14,7 +13,7 @@ namespace DefensieTrainer.Dal.Repositories
             _connectionString = connectionString;
         }
 
-        public void AddNewTraining(PostTrainingDto training)
+        public void AddNewTraining(CreateTrainingDto training)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {

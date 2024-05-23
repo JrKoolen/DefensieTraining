@@ -1,5 +1,5 @@
-﻿namespace DefensieTrainer.Domain.DTO.IN;
-public class PostUserDto
+﻿namespace DefensieTrainer.Domain.DTO;
+public class CreateUserDto
 {
     public int Id { get; set; }
     public string Name { get; set; }

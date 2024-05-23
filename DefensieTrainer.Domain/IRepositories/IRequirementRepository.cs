@@ -1,5 +1,5 @@
-﻿using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
+﻿using DefensieTrainer.Domain.DTO;
+
 namespace DefensieTrainer.Domain.IRepositories
 {
     public interface IRequirementRepository

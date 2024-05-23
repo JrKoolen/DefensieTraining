@@ -28,3 +28,19 @@ footer.footer {
     font-size: 1.5rem; /* Example font size */
     font-weight: bold; /* Example font weight */
 }
+
+/* Reduce the height of the navbar */
+.navbar {
+    height: 50px; /* Adjust this value as needed */
+}
+
+/* Adjust padding for navbar items to center them better vertically */
+.nav-link {
+    padding-top: 5px; /* Adjust as needed */
+    padding-bottom: 5px; /* Adjust as needed */
+}
+
+/* Reduce the font size of the navbar brand and links */
+.navbar-brand, .nav-link {
+    font-size: 0.9em; /* Adjust this value as needed */
+}

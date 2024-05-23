@@ -1,8 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using DefensieTrainer.Domain.IRepositories;
-using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
 using System.Diagnostics.Metrics;
+using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.Dal.Repositories
 {
@@ -158,7 +157,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public void UpdateCluster(PostClusterDto cluster)
+        public void UpdateCluster(CreateClusterDto cluster)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {

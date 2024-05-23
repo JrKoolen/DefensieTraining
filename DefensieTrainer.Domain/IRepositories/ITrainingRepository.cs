@@ -1,11 +1,10 @@
-﻿using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
+﻿using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.Domain.IRepositories
 {
     public interface ITrainingRepository
     {
-        void AddNewTraining(PostTrainingDto training);
+        void AddNewTraining(CreateTrainingDto training);
 
         TrainingDto GetTrainingById(int trainingId);
 

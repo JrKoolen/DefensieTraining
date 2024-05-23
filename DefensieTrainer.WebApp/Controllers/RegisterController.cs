@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DefensieTrainer.Domain.IServices;
-using DefensieTrainer.Domain.DTO.IN;
+using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.WebApp.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 

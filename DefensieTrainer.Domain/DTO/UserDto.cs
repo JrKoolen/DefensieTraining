@@ -1,4 +1,4 @@
-﻿namespace DefensieTrainer.Domain.DTO.OUT;
+﻿namespace DefensieTrainer.Domain.DTO;
 
 
 public class UserDto

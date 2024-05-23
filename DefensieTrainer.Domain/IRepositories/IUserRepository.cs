@@ -1,5 +1,4 @@
-﻿using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
+﻿using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.Logica;
 
 namespace DefensieTrainer.Domain.IRepositories
@@ -8,9 +7,9 @@ namespace DefensieTrainer.Domain.IRepositories
     {
         UserDto GetById(int id);
 
-        void CreateUser(PostUserDto User);
+        void CreateUser(CreateUserDto User);
 
-        void UpdateUser(PostUserDto User);
+        void UpdateUser(CreateUserDto User);
 
         void DeleteUser(int id);
 

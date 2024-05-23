@@ -1,13 +1,12 @@
-﻿using DefensieTrainer.Domain.DTO.OUT;
-using DefensieTrainer.Domain.DTO.IN;
+﻿using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.Domain.IServices
 {
     public interface IClusterService
     {
-        public void CreateCluster(PostClusterDto ClustertDto);
+        public void CreateCluster(CreateClusterDto ClustertDto);
 
-        public void ChangeCluster(PostClusterDto ClustertDto);
+        public void ChangeCluster(CreateClusterDto ClustertDto);
 
         public void RemoveCluster(int companyId);
 

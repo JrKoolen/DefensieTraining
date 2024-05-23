@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using DefensieTrainer.Domain.DTO.IN;
-using DefensieTrainer.Domain.DTO.OUT;
 using System.Runtime.InteropServices;
+using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.WebApp.Models
 {
@@ -24,9 +23,9 @@ namespace DefensieTrainer.WebApp.Models
         public List<Requirement>? Requirements = new List<Requirement>();
 
 
-        public PostClusterDto ToDto()
+        public CreateClusterDto ToDto()
         {
-            return new PostClusterDto()
+            return new CreateClusterDto()
             {
                 Id = this.id,
                 ClusterLevel = this.ClusterLevel,

@@ -1,5 +1,4 @@
-﻿using DefensieTrainer.Domain.DTO.OUT;
-using DefensieTrainer.Domain.DTO.IN;
+﻿using DefensieTrainer.Domain.DTO;
 namespace DefensieTrainer.Domain.IRepositories
 {
     public interface IClusterRepository
@@ -8,7 +7,7 @@ namespace DefensieTrainer.Domain.IRepositories
 
         void CreateCluster(Cluster cluster);
 
-        void UpdateCluster(PostClusterDto postclusterdDto);
+        void UpdateCluster(CreateClusterDto postclusterdDto);
 
         void DeleteCluster(int id);
 
