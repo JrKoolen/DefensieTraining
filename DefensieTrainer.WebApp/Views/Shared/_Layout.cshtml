@@ -1,59 +1,19 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DefensieTraining</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DefensieTraining.styles.css" asp-append-version="true" />
-    <style>
-        /* Increase the height of the navbar */
-        .navbar {
-            height: 80px; /* Adjust this value as needed */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-        /* Center the navbar content */
-        .navbar .navbar-collapse {
-            justify-content: center;
-        }
-
-        /* Increase the font size of the navbar brand and links */
-        .navbar-brand, .nav-link {
-            font-size: 1.5em; /* Adjust this value as needed */
-        }
-
-        /* Ensure navbar items are centered */
-        .navbar-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Center the items within each nav-item */
-        .nav-item {
-            display: flex;
-            align-items: center;
-        }
-
-        /* Adjust padding for nav links to center them better vertically */
-        .nav-link {
-            padding: 0 15px; /* Adjust as needed */
-        }
-    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color: white;">DefensieTraining</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DefensieTraining</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -67,17 +27,34 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Cluster" asp-action="CreateRequirement">Create Requirement</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
                     </ul>
+                    @if (!string.IsNullOrEmpty(ViewBag.Email) && !string.IsNullOrEmpty(ViewBag.Name))
+                    {
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @ViewBag.Name
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Login" asp-action="Logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
-
         </nav>
     </header>
     <div class="container">

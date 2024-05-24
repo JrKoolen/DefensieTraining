@@ -22,7 +22,7 @@ namespace DefensieTrainer.Dal.Repositories
             {
                 connection.Open();
 
-                string query = @"INSERT INTO User (Name, LastName, Email, Password, Weight, Length, ArrivalDate, ArmedForce)
+                string query = @"INSERT INTO Person (Name, LastName, Email, Password, Weight, Length, ArrivalDate, ArmedForce)
                                  VALUES (@Name, @LastName, @Email, @Password, @Weight, @Length, @ArrivalDate, @ArmedForce)";
 
                 using (var command = new MySqlCommand(query, connection))
@@ -41,13 +41,45 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
+        public UserDto GetUserByEmail(string email)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Person WHERE Email = @Email";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new UserDto
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Name = reader["Name"].ToString(),
+                                LastName = reader["LastName"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                Password = reader["Password"].ToString(),
+                                Weight = Convert.ToSingle(reader["Weight"]),
+                                Length = Convert.ToSingle(reader["Length"]),
+                                ArrivalDate = Convert.ToDateTime(reader["ArrivalDate"]),
+                                ArmedForce = reader["ArmedForce"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         public void DeleteUser(int id)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
 
-                string query = "DELETE FROM User WHERE Id = @Id";
+                string query = "DELETE FROM Person WHERE Id = @Id";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -63,7 +95,7 @@ namespace DefensieTrainer.Dal.Repositories
             {
                 connection.Open();
 
-                string query = "DELETE FROM User WHERE Id IN (" + string.Join(",", ids) + ")";
+                string query = "DELETE FROM Person WHERE Id IN (" + string.Join(",", ids) + ")";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -78,7 +110,7 @@ namespace DefensieTrainer.Dal.Repositories
             {
                 connection.Open();
 
-                string query = "SELECT * FROM User";
+                string query = "SELECT * FROM Person";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -112,7 +144,7 @@ namespace DefensieTrainer.Dal.Repositories
             {
                 connection.Open();
 
-                string query = "SELECT * FROM User WHERE Id = @Id";
+                string query = "SELECT * FROM Person WHERE Id = @Id";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -146,7 +178,7 @@ namespace DefensieTrainer.Dal.Repositories
             {
                 connection.Open();
 
-                string query = @"UPDATE User
+                string query = @"UPDATE Person
                                  SET Name = @Name,
                                      LastName = @LastName,
                                      Email = @Email,

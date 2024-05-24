@@ -1,20 +1,41 @@
-﻿using DefensieTrainer.WebApp.Models;
+﻿using DefensieTrainer.Domain.DTO;
+using DefensieTrainer.Domain.IServices;
+using DefensieTrainer.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DefensieTrainer.Controllers
 {
-    public class AccountController : Controller
+    public class LoginController : Controller
     {
-        public IActionResult Login()
+        private readonly IUserService _userService;
+
+        public LoginController(IUserService userService)
         {
-            return View();
+            _userService = userService;
         }
 
-        // POST: /Account/Login
-        [HttpPost]
-        public IActionResult Login(UserViewModel model)
+        [HttpGet]
+        public IActionResult Login()
         {
-            return RedirectToAction("Index", "Dashboard");
+            return View("~/Views/Login/Login.cshtml");
         }
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                UserDto user = _userService.AuthenticateUser(model.Email, model.Password);
+                if (user != null)
+                {
+                    ViewBag.UserEmail = user.Email;
+                    ViewBag.UserName = user.Name;
+                    return View("~/Views/Home/Index.cshtml"); // Assuming your home page is named Index.cshtml
+                }
+                ModelState.AddModelError("", "Invalid login attempt.");
+            }
+            return View(model);
+        }
+
     }
 }

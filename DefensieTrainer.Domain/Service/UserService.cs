@@ -4,18 +4,34 @@ using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.Domain.Service
 {
-    public class UserService : IUserServices
+    public class UserService : IUserService
     {
-        public readonly IUserRepository _UserRepository;
-
-        public UserService(IUserRepository UserRepository)
+        public readonly IUserRepository _userRepository;
+        public UserService(IUserRepository userRepository)
         {
-            _UserRepository = UserRepository;
+            _userRepository = userRepository;
+        }
+
+
+        public UserDto AuthenticateUser(string email, string password)
+        {
+            UserDto user = _userRepository.GetUserByEmail(email);
+            if (user != null && user.Password == password)
+            {
+                return new UserDto
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                };
+            }
+            return null;
         }
 
         public void CreateUser(CreateUserDto userInput)
         {
-            _UserRepository.CreateUser(userInput);
+            _userRepository.CreateUser(userInput);
         }
 
         public void DeleteUser(int userId)

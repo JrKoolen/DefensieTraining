@@ -1,35 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IServices;
-using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.WebApp.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DefensieTrainer.WebApp.Controllers
 {
     public class RegisterController : Controller
     {
-        private readonly IUserServices _userServices;
+        private readonly IUserService _userService;
 
-        public RegisterController(IUserServices userServices)
+        public RegisterController(IUserService userService)
         {
-            _userServices = userServices;
+            _userService = userService;
         }
 
+        [HttpGet]
         public IActionResult Register()
         {
             return View("~/Views/Account/Register.cshtml");
         }
 
+        [HttpPost]
         public IActionResult CreateUser(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _userServices.CreateUser(model.ToPostDto());
-                return RedirectToAction("Login");
+                _userService.CreateUser(model.ToPostDto());
+                return RedirectToAction("Login", "Login");
             }
             else
             {
-                return View(model);
+                return View("~/Views/Account/Register.cshtml", model);
             }
         }
     }
