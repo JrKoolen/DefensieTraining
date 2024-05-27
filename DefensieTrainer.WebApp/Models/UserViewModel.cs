@@ -20,9 +20,9 @@ namespace DefensieTrainer.WebApp.Models
         [Required]
         public string ArmedForce { get; set; }
 
-        public  CreateUserDto ToPostDto()
+        public  CreatePersonDto ToPostDto()
         {
-            return new CreateUserDto
+            return new CreatePersonDto
             {
                 Name = this.Name,
                 LastName = this.LastName,

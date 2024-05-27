@@ -4,21 +4,21 @@ using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.Domain.Service
 {
-    public class UserService : IUserService
+    public class PersonService : IPersonService
     {
-        public readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository)
+        public readonly IPersonRepository _personRepository;
+        public PersonService(IPersonRepository personRepository)
         {
-            _userRepository = userRepository;
+            _personRepository = personRepository;
         }
 
 
-        public UserDto AuthenticateUser(string email, string password)
+        public PersonDto AuthenticateUser(string email, string password)
         {
-            UserDto user = _userRepository.GetUserByEmail(email);
+            PersonDto user = _personRepository.GetUserByEmail(email);
             if (user != null && user.Password == password)
             {
-                return new UserDto
+                return new PersonDto
                 {
                     Id = user.Id,
                     Name = user.Name,
@@ -29,9 +29,9 @@ namespace DefensieTrainer.Domain.Service
             return null;
         }
 
-        public void CreateUser(CreateUserDto userInput)
+        public void CreateUser(CreatePersonDto userInput)
         {
-            _userRepository.CreateUser(userInput);
+            _personRepository.CreateUser(userInput);
         }
 
         public void DeleteUser(int userId)
@@ -39,17 +39,17 @@ namespace DefensieTrainer.Domain.Service
             throw new NotImplementedException();
         }
 
-        public IEnumerable<UserDto> GetAllUsers()
+        public IEnumerable<PersonDto> GetAllUsers()
         {
             throw new NotImplementedException();
         }
 
-        public UserDto GetUserById(int userId)
+        public PersonDto GetUserById(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateUser(int userId, CreateUserDto userInput)
+        public void UpdateUser(int userId, CreatePersonDto userInput)
         {
             throw new NotImplementedException();
         }

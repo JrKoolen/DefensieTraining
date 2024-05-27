@@ -1,5 +1,7 @@
-﻿namespace DefensieTrainer.Domain.DTO;
-public class CreateUserDto
+﻿using DefensieTrainer.Domain.Enums;
+
+namespace DefensieTrainer.Domain.DTO;
+public class CreatePersonDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -10,5 +12,6 @@ public class CreateUserDto
     public float Length { get; set; }
     public DateTime ArrivalDate { get; set; }
     public string ArmedForce { get; set; }
+    public Role Role { get; set; }
 }
 

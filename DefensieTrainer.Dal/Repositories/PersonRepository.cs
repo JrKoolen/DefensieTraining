@@ -1,29 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using DefensieTrainer.Domain.DTO;
+using DefensieTrainer.Domain.Enums;
 using DefensieTrainer.Domain.IRepositories;
 using DefensieTrainer.Domain.Logica;
 using MySql.Data.MySqlClient;
 
 namespace DefensieTrainer.Dal.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class PersonRepository : IPersonRepository
     {
         private readonly string _connectionString;
 
-        public UserRepository(string connectionString)
+        public PersonRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public void CreateUser(CreateUserDto user)
+        public void CreateUser(CreatePersonDto user)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
 
-                string query = @"INSERT INTO Person (Name, LastName, Email, Password, Weight, Length, ArrivalDate, ArmedForce)
-                                 VALUES (@Name, @LastName, @Email, @Password, @Weight, @Length, @ArrivalDate, @ArmedForce)";
+                string query = @"INSERT INTO Person (Name, LastName, Email, Password, Weight, Length, ArrivalDate, ArmedForce, Role)
+                                 VALUES (@Name, @LastName, @Email, @Password, @Weight, @Length, @ArrivalDate, @ArmedForce, @Role)";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -35,13 +36,14 @@ namespace DefensieTrainer.Dal.Repositories
                     command.Parameters.AddWithValue("@Length", user.Length);
                     command.Parameters.AddWithValue("@ArrivalDate", user.ArrivalDate);
                     command.Parameters.AddWithValue("@ArmedForce", user.ArmedForce);
+                    command.Parameters.AddWithValue("@Role", user.Role);
 
                     command.ExecuteNonQuery();
                 }
             }
         }
 
-        public UserDto GetUserByEmail(string email)
+        public PersonDto GetUserByEmail(string email)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -54,7 +56,7 @@ namespace DefensieTrainer.Dal.Repositories
                     {
                         if (reader.Read())
                         {
-                            return new UserDto
+                            return new PersonDto
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"].ToString(),
@@ -64,7 +66,9 @@ namespace DefensieTrainer.Dal.Repositories
                                 Weight = Convert.ToSingle(reader["Weight"]),
                                 Length = Convert.ToSingle(reader["Length"]),
                                 ArrivalDate = Convert.ToDateTime(reader["ArrivalDate"]),
-                                ArmedForce = reader["ArmedForce"].ToString()
+                                ArmedForce = reader["ArmedForce"].ToString(),
+                                Role = Enum.TryParse(reader["Role"].ToString(), out Role role) ? role : Role.User
+
                             };
                         }
                     }
@@ -104,7 +108,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public List<UserDto> GetAllUsers()
+        public List<PersonDto> GetAllUsers()
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -116,10 +120,10 @@ namespace DefensieTrainer.Dal.Repositories
                 {
                     using (var reader = command.ExecuteReader())
                     {
-                        var users = new List<UserDto>();
+                        var users = new List<PersonDto>();
                         while (reader.Read())
                         {
-                            users.Add(new UserDto
+                            users.Add(new PersonDto
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"].ToString(),
@@ -138,7 +142,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public UserDto GetById(int id)
+        public PersonDto GetById(int id)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -154,7 +158,7 @@ namespace DefensieTrainer.Dal.Repositories
                     {
                         if (reader.Read())
                         {
-                            return new UserDto
+                            return new PersonDto
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"].ToString(),
@@ -172,7 +176,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public void UpdateUser(CreateUserDto user)
+        public void UpdateUser(CreatePersonDto user)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
-
+using DefensieTrainer.Domain.Enums;
 namespace DefensieTrainer.Domain.DTO;
 
 
-public class UserDto
+public class PersonDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -14,5 +14,6 @@ public class UserDto
     public float Length { get; set; }
     public DateTime ArrivalDate { get; set; }
     public string ArmedForce { get; set; }
+    public Role Role { get; set; }
 }
 

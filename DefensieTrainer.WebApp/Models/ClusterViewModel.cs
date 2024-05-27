@@ -5,7 +5,6 @@ using DefensieTrainer.Domain.DTO;
 
 namespace DefensieTrainer.WebApp.Models
 {
-
     public class ClusterViewModel
     {
 

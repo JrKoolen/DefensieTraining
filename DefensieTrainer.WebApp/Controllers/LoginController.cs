@@ -2,14 +2,20 @@
 using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DefensieTrainer.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IUserService _userService;
+        private readonly IPersonService _userService;
 
-        public LoginController(IUserService userService)
+        public LoginController(IPersonService userService)
         {
             _userService = userService;
         }
@@ -21,21 +27,48 @@ namespace DefensieTrainer.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                UserDto user = _userService.AuthenticateUser(model.Email, model.Password);
+                PersonDto user = _userService.AuthenticateUser(model.Email, model.Password);
                 if (user != null)
                 {
-                    ViewBag.UserEmail = user.Email;
-                    ViewBag.UserName = user.Name;
-                    return View("~/Views/Home/Index.cshtml"); // Assuming your home page is named Index.cshtml
+                    if (user != null)
+                    {
+                        HttpContext.Session.SetString("UserEmail", user.Email);
+                        HttpContext.Session.SetString("UserName", user.Name);
+                    }
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, user.Name),
+                        new Claim(ClaimTypes.Email, user.Email),
+                        new Claim(ClaimTypes.Role, user.Role.ToString()) 
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var authProperties = new AuthenticationProperties
+                    {
+                        IsPersistent = model.RememberMe
+                    };
+
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity),
+                        authProperties);
+
+
+                    return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Invalid login attempt.");
             }
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

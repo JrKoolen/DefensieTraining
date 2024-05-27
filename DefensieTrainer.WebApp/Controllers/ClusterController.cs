@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.WebApp.Models;
 using DefensieTrainer.Domain.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DefensieTraining.Controllers
 {
+    [Authorize(Roles = "Manager")]
     public class ClusterController : Controller
     {
         private readonly IClusterService _clusterService;
@@ -19,7 +21,7 @@ namespace DefensieTraining.Controllers
             _requirementService = requirementService;
         }
 
-
+        [Authorize(Roles = "Manager")]
         public IActionResult CreateRequirement(RequirementViewModel model)
         {
             model.SortTrainingOptions = TrainingManager.GetTrainingOptions();
@@ -32,7 +34,7 @@ namespace DefensieTraining.Controllers
             }
             return View(model);
         }
-
+        [Authorize(Roles = "Manager")]
         public IActionResult CreateCluster(ClusterViewModel model, string viewRequirements)
         {
             if (!string.IsNullOrEmpty(viewRequirements))
@@ -53,7 +55,7 @@ namespace DefensieTraining.Controllers
             
         }
 
-
+        [Authorize(Roles = "Manager")]
         public IActionResult  ClusterManager()
         {
             
@@ -62,7 +64,7 @@ namespace DefensieTraining.Controllers
             viewModel.Clusters = _clusterService.GetAllClusters();
             return View(viewModel);
         }
-
+        [Authorize(Roles = "Manager")]
         public IActionResult SaveClusters(ClusterViewModel model)
         {
             if (ModelState.IsValid)

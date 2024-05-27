@@ -1,79 +1,8 @@
 ﻿@model RequirementViewModel
 
 @{
-    ViewData["Title"] = "CreateRequirement";
+    ViewData["Title"] = "Create Requirement";
 }
-
-<style>
-    header {
-        position: fixed;
-        top: 50;
-        left: 0;
-        width: 100%;
-        background-color: #333;
-        color: black;
-        text-align: center;
-        line-height: 50px;
-    }
-
-    form {
-        margin-top: 50px; 
-    }
-
-    body {
-        background-color: #f0f0f0;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        height: 100vh;
-    }
-
-    .form-control {
-        width: 400px;
-    }
-
-    .additional-input {
-        display: none;
-    }
-</style>
-
-<h1>CreateRequirement</h1>
-
-<form asp-controller="Cluster" asp-action="CreateRequirement" method="post">
-    <div class="form-group">
-        <label for="Name">Name:</label>
-        <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" />
-        <span asp-validation-for="Name" class="text-danger" style="display:none;"></span>
-    </div>
-    <div class="form-group additional-input" id="description-group">
-        <label for="Description">Description:</label>
-        <textarea class="form-control" id="Description" name="Description">@Model.Description</textarea>
-        <span asp-validation-for="Description" class="text-danger" style="display:none;"></span>
-    </div>
-    <div class="form-group additional-input" id="sortTraining-group">
-        <label for="SortTraining">Sort Training:</label>
-        <select class="form-control" id="SortTraining" name="SortTraining">
-            <option value="">Select Sort Training</option>
-            @foreach (var sortTrainingOption in Model.SortTrainingOptions)
-            {
-                <option value="@sortTrainingOption.Value">@sortTrainingOption.Text</option>
-            }
-        </select>
-    </div>
-    <div class="form-group additional-input" id="amount-group">
-        <label for="Amount">Amount:</label>
-        <input type="number" class="form-control" id="Amount" name="Amount" value="@Model.Amount" />
-        <span asp-validation-for="Amount" class="text-danger" style="display:none;"></span>
-    </div>
-    <div class="form-group additional-input" id="timeInSeconds-group">
-        <label for="TimeInSeconds">Time:</label>
-        <input type="number" class="form-control" id="TimeInSeconds" name="TimeInSeconds" value="@Model.TimeInSeconds" />
-
-        <span asp-validation-for="TimeInSeconds" class="text-danger" style="display:none;"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Add Requirement</button>
-</form>
 
 @section Scripts {
     <script>
@@ -112,3 +41,38 @@
         });
     </script>
 }
+
+<div class="container">
+    <h1>Create Requirement</h1>
+    <hr />
+    <form asp-action="CreateRequirement">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group" id="description-group" style="display:none;">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group" id="sortTraining-group" style="display:none;">
+            <label asp-for="SortTraining" class="control-label"></label>
+            <input asp-for="SortTraining" class="form-control" />
+            <span asp-validation-for="SortTraining" class="text-danger"></span>
+        </div>
+        <div class="form-group" id="amount-group" style="display:none;">
+            <label asp-for="Amount" class="control-label"></label>
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="form-group" id="timeInSeconds-group" style="display:none;">
+            <label asp-for="TimeInSeconds" class="control-label"></label>
+            <input asp-for="TimeInSeconds" class="form-control" />
+            <span asp-validation-for="TimeInSeconds" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
