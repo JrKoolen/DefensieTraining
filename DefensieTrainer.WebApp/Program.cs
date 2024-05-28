@@ -17,6 +17,12 @@ ConfigurationProvider config = new ConfigurationProvider();
 string connectionString = config.GetConnectionString();
 builder.Services.AddSingleton(connectionString);
 
+builder.Services.AddScoped<ITrainingService, TrainingService>();
+builder.Services.AddScoped<ITrainingRepository, TrainingRepository>(provider =>
+{
+    var connectionString = provider.GetRequiredService<string>();
+    return new TrainingRepository(connectionString);
+});
 builder.Services.AddScoped<IRequirementServices, RequirementService>();
 builder.Services.AddScoped<IRequirementRepository, RequirementRepository>(provider =>
 {

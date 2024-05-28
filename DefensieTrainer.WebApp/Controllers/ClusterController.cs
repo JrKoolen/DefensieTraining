@@ -69,13 +69,10 @@ namespace DefensieTraining.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Retrieve the list of clusters from the ModelState
                 var clustersEntry = ModelState["Clusters"];
 
-                // Check if the entry for "Clusters" exists and is of the correct type
                 if (clustersEntry != null && clustersEntry.RawValue is List<CreateClusterDto> clusters)
                 {
-                    // Loop through each cluster and call the ChangeCluster method
                     foreach (var cluster in clusters)
                     {
                         _clusterService.ChangeCluster(cluster);

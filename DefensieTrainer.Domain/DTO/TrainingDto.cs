@@ -12,5 +12,6 @@ public class TrainingDto
     public int Meters { get; set; }
     public DateTime DateTime { get; set; }
     public int PersonId { get; set; }
+    public Boolean ForUser {  get; set; }
 }
 

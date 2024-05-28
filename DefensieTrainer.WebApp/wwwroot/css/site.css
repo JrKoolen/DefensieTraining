@@ -43,4 +43,11 @@ footer.footer {
 /* Reduce the font size of the navbar brand and links */
 .navbar-brand, .nav-link {
     font-size: 0.9em; /* Adjust this value as needed */
+    color: white;
+}
+.white{
+    color: white;
+}
+.container-fluid{
+    color: white
 }

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace DefensieTrainer.Domain.DTO
 {
-    public class CreateTrainingDto
+    public class UserTrainingInputDto
     {
-        public string? Name { get; set; }
-        public string? Description { get; set; }
         public int? ClusterId { get; set; }
         public int SortTraining { get; set; }
         public int Amount { get; set; }
@@ -17,7 +15,5 @@ namespace DefensieTrainer.Domain.DTO
         public int Meters { get; set; }
         public DateTime DateTime { get; set; }
         public int PersonId { get; set; }
-        public Boolean ForUser { get; set; }
-
     }
 }

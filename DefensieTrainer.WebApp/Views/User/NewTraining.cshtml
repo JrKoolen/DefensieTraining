@@ -1,0 +1,46 @@
+﻿@model DefensieTrainer.WebApp.Models.UserTrainingViewModel;
+@using System.Security.Claims
+@inject IHttpContextAccessor HttpContextAccessor
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+*@
+@{
+}
+
+<form asp-action="SubmitTraining" method="post">
+
+
+    <div class="form-group">
+        <label asp-for="SortTraining"></label>
+        <input asp-for="SortTraining" class="form-control" />
+        <span asp-validation-for="SortTraining" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Amount"></label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TimeInSeconds"></label>
+        <input asp-for="TimeInSeconds" class="form-control" />
+        <span asp-validation-for="TimeInSeconds" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Meters"></label>
+        <input asp-for="Meters" class="form-control" />
+        <span asp-validation-for="Meters" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DateTime"></label>
+        <input asp-for="DateTime" class="form-control" />
+        <span asp-validation-for="DateTime" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

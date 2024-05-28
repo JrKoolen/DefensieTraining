@@ -24,6 +24,11 @@ namespace DefensieTrainer.Domain.Service
                     Name = user.Name,
                     LastName = user.LastName,
                     Email = user.Email,
+                    Role = user.Role,
+                    ArmedForce = user.ArmedForce,
+                    ArrivalDate = user.ArrivalDate,
+                    Length = user.Length,
+                    Weight = user.Weight,
                 };
             }
             return null;

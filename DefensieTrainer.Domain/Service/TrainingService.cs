@@ -2,7 +2,7 @@
 using DefensieTrainer.Domain.IRepositories;
 using DefensieTrainer.Domain.IServices;
 
-namespace DefensieTrainer.Services
+namespace DefensieTrainer.Domain.Service
 {
     public class TrainingService : ITrainingService
     {

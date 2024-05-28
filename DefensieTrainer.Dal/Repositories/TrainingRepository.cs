@@ -17,7 +17,8 @@ namespace DefensieTrainer.Dal.Repositories
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
-                string query = "INSERT INTO Trainings (Name, Description, ClusterId, SortTraining, Amount, TimeInSeconds, Meters, DateTime, PersonId) VALUES (@Name, @Description, @ClusterId, @SortTraining, @Amount, @TimeInSeconds, @Meters, @DateTime, @PersonId)";
+                string query = "INSERT INTO Trainings (Name, Description, ClusterId, SortTraining, Amount, TimeInSeconds, Meters, DateTime, PersonId, ForUser) VALUES" +
+                    " (@Name, @Description, @ClusterId, @SortTraining, @Amount, @TimeInSeconds, @Meters, @DateTime, @PersonId, @ForUser)";
                 connection.Open();
                 var command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Name", training.Name);
@@ -29,6 +30,7 @@ namespace DefensieTrainer.Dal.Repositories
                 command.Parameters.AddWithValue("@Meters", training.Meters);
                 command.Parameters.AddWithValue("@DateTime", training.DateTime);
                 command.Parameters.AddWithValue("@PersonId", training.PersonId);
+                command.Parameters.AddWithValue("@ForUser", training.ForUser);
                 command.ExecuteNonQuery();
             }
         }
@@ -68,7 +70,8 @@ namespace DefensieTrainer.Dal.Repositories
                             TimeInSeconds = Convert.ToInt32(reader["TimeInSeconds"]),
                             Meters = Convert.ToInt32(reader["Meters"]),
                             DateTime = Convert.ToDateTime(reader["DateTime"]),
-                            PersonId = Convert.ToInt32(reader["PersonId"])
+                            PersonId = Convert.ToInt32(reader["PersonId"]),
+                            ForUser = Convert.ToBoolean(reader["ForUser"])
                         };
                         trainings.Add(training);
                     }
@@ -126,6 +129,7 @@ namespace DefensieTrainer.Dal.Repositories
                 command.Parameters.AddWithValue("@Meters", training.Meters);
                 command.Parameters.AddWithValue("@DateTime", training.DateTime);
                 command.Parameters.AddWithValue("@PersonId", training.PersonId);
+                command.Parameters.AddWithValue("@ForUser", training.ForUser);
                 command.ExecuteNonQuery();
             }
         }

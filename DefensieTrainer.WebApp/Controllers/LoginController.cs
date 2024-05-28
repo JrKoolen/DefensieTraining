@@ -25,6 +25,11 @@ namespace DefensieTrainer.Controllers
         {
             return View("~/Views/Login/Login.cshtml");
         }
+        [HttpGet]
+        public IActionResult Logout() 
+        {
+            return View("~/Views/Login/Logout.cshtml");
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -34,16 +39,11 @@ namespace DefensieTrainer.Controllers
                 PersonDto user = _userService.AuthenticateUser(model.Email, model.Password);
                 if (user != null)
                 {
-                    if (user != null)
-                    {
-                        HttpContext.Session.SetString("UserEmail", user.Email);
-                        HttpContext.Session.SetString("UserName", user.Name);
-                    }
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, user.Name),
                         new Claim(ClaimTypes.Email, user.Email),
-                        new Claim(ClaimTypes.Role, user.Role.ToString()) 
+                        new Claim(ClaimTypes.Role, user.Role.ToString())
                     };
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var authProperties = new AuthenticationProperties
@@ -65,8 +65,9 @@ namespace DefensieTrainer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout(LoginViewModel loginViewModel)
         {
+            HttpContext.Session.Clear();
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
