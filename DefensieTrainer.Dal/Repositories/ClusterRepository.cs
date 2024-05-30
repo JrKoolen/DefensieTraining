@@ -171,7 +171,7 @@ namespace DefensieTrainer.Dal.Repositories
                 {
                     command.Parameters.AddWithValue("@ClusterLevel", cluster.ClusterLevel);
                     command.Parameters.AddWithValue("@Description", cluster.Description);
-                    //command.Parameters.AddWithValue("@Id", cluster.Id);
+                    command.Parameters.AddWithValue("@Id", cluster.Id);
                     command.ExecuteNonQuery();
                 }
             }

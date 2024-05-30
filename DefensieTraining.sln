@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.UnitTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.Dal", "DefensieTrainer.Dal\DefensieTrainer.Dal.csproj", "{4CA81C00-8E67-43D6-9A83-7A50A53ACE0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefensieTrainer.Infrastructure", "DefensieTrainer.Infrastructure\DefensieTrainer.Infrastructure.csproj", "{4C450261-30CF-47B1-B62F-27C518649B63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensieTrainer.Infrastructure", "DefensieTrainer.Infrastructure\DefensieTrainer.Infrastructure.csproj", "{4C450261-30CF-47B1-B62F-27C518649B63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

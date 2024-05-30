@@ -26,7 +26,6 @@ namespace DefensieTrainer.WebApp.Models
         public DateTime ArrivalDate { get; set; }
         [Required]
         public string ArmedForce { get; set; }
-
         public Role Role = Role.User;
 
         public CreatePersonDto ToPostDto()

@@ -9,13 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DefensieTraining.Controllers
 {
-    [Authorize(Roles = "Manager")]
+    //[Authorize(Roles = "Manager")]
     public class ClusterController : Controller
     {
         private readonly IClusterService _clusterService;
-
         private readonly IRequirementServices _requirementService;
-
 
         public ClusterController(IClusterService clusterService, IRequirementServices requirementService)
         {
@@ -23,7 +21,7 @@ namespace DefensieTraining.Controllers
             _requirementService = requirementService;
         }
 
-        [Authorize(Roles = "Manager")]
+        //[Authorize(Roles = "Manager")]
         public IActionResult CreateRequirement(RequirementViewModel model)
         {
             model.SortTrainingOptions = TrainingTypes.SortTraining.Select(tt => new SelectListItem
@@ -32,7 +30,6 @@ namespace DefensieTraining.Controllers
                 Text = tt.Value
             }).ToList();
 
-
             if (ModelState.IsValid)
             {
                 _requirementService.CreateRequirement(model.ToDto());
@@ -40,7 +37,8 @@ namespace DefensieTraining.Controllers
             }
             return View(model);
         }
-        [Authorize(Roles = "Manager")]
+
+        //[Authorize(Roles = "Manager")]
         public IActionResult CreateCluster(ClusterViewModel model, string viewRequirements)
         {
             if (!string.IsNullOrEmpty(viewRequirements))
@@ -61,7 +59,7 @@ namespace DefensieTraining.Controllers
             
         }
 
-        [Authorize(Roles = "Manager")]
+        //[Authorize(Roles = "Manager")]
         public IActionResult  ClusterManager()
         {
             
@@ -70,7 +68,8 @@ namespace DefensieTraining.Controllers
             viewModel.Clusters = _clusterService.GetAllClusters();
             return View(viewModel);
         }
-        [Authorize(Roles = "Manager")]
+
+        //[Authorize(Roles = "Manager")]
         public IActionResult SaveClusters(ClusterViewModel model)
         {
             if (ModelState.IsValid)
@@ -85,9 +84,22 @@ namespace DefensieTraining.Controllers
                     }
                 }
             }
-            else { return View(); }
-
+            else 
+            {
+                return View(); 
+            }
             return RedirectToAction("ClusterManager");
+        }
+
+        [HttpGet]
+        public IActionResult RoleAssignment()
+        {
+            var model = new RoleAssignmentViewModel
+            {
+                Roles = RoleTypes.roles.ToDictionary(role => role.Key.ToString(), role => role.Value)
+            };
+
+            return View(model);
         }
 
     }

@@ -17,7 +17,6 @@ namespace DefensieTrainer.WebApp.Models
         public int Meters { get; set; }
         [Display(Name = "What day did you do this exercise?")]
         public DateTime DateTime { get; set; }
-
         public Boolean NeedsFeedback { get; set; }
 
         public UserTrainingInputDto ToDto()

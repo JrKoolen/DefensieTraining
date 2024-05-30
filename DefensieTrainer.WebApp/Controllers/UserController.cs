@@ -8,7 +8,6 @@ namespace DefensieTrainer.WebApp.Controllers
 {
     public class UserController : Controller
     {
-
         private readonly ITrainingService _trainingService;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
