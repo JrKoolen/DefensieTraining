@@ -12,6 +12,7 @@ public class PersonDto
     public string Email { get; set; }
     public float Weight { get; set; }
     public float Length { get; set; }
+    public int ClusterId { get; set; }
     public DateTime ArrivalDate { get; set; }
     public string ArmedForce { get; set; }
     public Role Role { get; set; }

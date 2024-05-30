@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IRepositories;
+using System.Xml.Linq;
 
 public class RequirementRepository : IRequirementRepository
 {
@@ -14,7 +15,7 @@ public class RequirementRepository : IRequirementRepository
     }
 
 
-    public void CreateRequirement(Requirement requirement)
+    public void CreateRequirement(CreateRequirementDto requirement)
     {
         using (var connection = new MySqlConnection(_connectionString))
         {
@@ -99,7 +100,7 @@ public class RequirementRepository : IRequirementRepository
     }
 
 
-    public Requirement GetById(int id)
+    public RequirementDto GetById(int id)
     {
         using (var connection = new MySqlConnection(_connectionString))
         {
@@ -112,23 +113,25 @@ public class RequirementRepository : IRequirementRepository
                 {
                     if (reader.Read())
                     {
-                        return new Requirement(
-                            Convert.ToInt32(reader["id"]),
-                            reader["Name"].ToString(),
-                            reader["Description"].ToString(),
-                            Convert.ToInt32(reader["Cluster_id"]),
-                            Convert.ToInt32(reader["SortTraining"]),
-                            Convert.ToInt32(reader["SortTraining"]),
-                            Convert.ToInt32(reader["TimeInSeconds"])
-                        );
+                        RequirementDto requirement = new RequirementDto
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
+                            Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString(),
+                            ClusterId = reader["Cluster_id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Cluster_id"]),
+                            SortTraining = reader["SortTraining"] == DBNull.Value ? 0 : Convert.ToInt32(reader["SortTraining"]),
+                            Amount = reader["Amount"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Amount"]),
+                            TimeInSeconds = reader["TimeInSeconds"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TimeInSeconds"])
+                        };
+                        return requirement;
                     }
-                    return null; // If no requirement found with the given id
+                    return null;
                 }
             }
         }
     }
 
-    public void UpdateRequirement(Requirement requirement)
+    public void UpdateRequirement(RequirementDto requirement)
     {
         using (var connection = new MySqlConnection(_connectionString))
         {

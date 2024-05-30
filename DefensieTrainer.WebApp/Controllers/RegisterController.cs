@@ -14,13 +14,13 @@ namespace DefensieTrainer.WebApp.Controllers
             _userService = userService;
         }
 
-        [Authorize]
+        [HttpGet]
         public IActionResult Register()
         {
             return View("~/Views/Account/Register.cshtml");
         }
 
-        [Authorize]
+        [HttpPost]
         public IActionResult CreateUser(RegisterViewModel model)
         {
             if (ModelState.IsValid)

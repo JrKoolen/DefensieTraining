@@ -15,41 +15,21 @@ namespace DefensieTrainer.Domain.Service
     
         public void ChangeRequirement(RequirementDto requirementDto)
         {
-            Requirement requirement = new() 
-            {
-                Id = requirementDto.Id,
-                Name = requirementDto.Name,
-                Description = requirementDto.Description,
-                Amount = requirementDto.Amount,
-                ClusterId = requirementDto.ClusterId,
-                SortTraining = requirementDto.SortTraining,
-                TimeInSeconds = requirementDto.TimeInSeconds,
-
-            };
+            _requirementRepository.UpdateRequirement(requirementDto);
         }
 
         public void CreateRequirement(CreateRequirementDto requirementDto)
         {
-            Requirement requirement = new Requirement
-            {
-                ClusterId = requirementDto.ClusterId,
-                Name = requirementDto.Name,
-                Description = requirementDto.Description,
-                SortTraining = requirementDto.SortTraining,
-                Amount = requirementDto.Amount,
-                TimeInSeconds = requirementDto.TimeInSeconds
-            };
-
-            _requirementRepository.CreateRequirement(requirement);
+            _requirementRepository.CreateRequirement(requirementDto);
         }
 
-        public List<Requirement> GetAllRequirements()
+        public List<RequirementDto> GetAllRequirements()
         {
-            List<Requirement> requirements = new List<Requirement>();
+            List<RequirementDto> requirements = new List<RequirementDto>();
 
             foreach (var requirementDto in _requirementRepository.GetAllRequirements())
             {
-                Requirement requirement = new Requirement
+                RequirementDto requirement = new RequirementDto
                 {
                     ClusterId = requirementDto.ClusterId,
                     Name = requirementDto.Name,

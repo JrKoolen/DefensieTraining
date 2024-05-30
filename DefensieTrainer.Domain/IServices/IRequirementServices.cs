@@ -12,7 +12,7 @@ namespace DefensieTrainer.Domain.IServices
 
         public void RemoveRequirement(List<int> companyIds);
 
-        public List<Requirement> GetAllRequirements();
+        public List<RequirementDto> GetAllRequirements();
     }
 
 }

@@ -1,0 +1,57 @@
+﻿@model DefensieTrainer.WebApp.Models.NextTrainingForUserViewModel;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Training</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        /* Center the content horizontally */
+
+        /* Styles for the form */
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto; /* Center the form horizontally */
+        }
+
+        .form-control {
+            font-size: 0.875rem; /* Smaller font size */
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .form-header h1 {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+
+            .form-header p {
+                font-size: 1rem;
+                color: #666;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Next Training Details</h1>
+            </div>
+            <div>
+                <h2>Name: @Html.DisplayFor(model => model.Name)</h2>
+                <p>Description: @Html.DisplayFor(model => model.Description)</p>
+                <p>Cluster ID: @Html.DisplayFor(model => model.ClusterId)</p>
+                <p>Sort Training: @Html.DisplayFor(model => model.SortTraining)</p>
+                <p>Amount: @Html.DisplayFor(model => model.Amount)</p>
+                <p>Time in Seconds: @Html.DisplayFor(model => model.TimeInSeconds)</p>
+                <p>Meters: @Html.DisplayFor(model => model.Meters)</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

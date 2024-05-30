@@ -16,10 +16,10 @@ namespace DefensieTrainer.WebApp.Models
         [Required]
         public string Description { get; set; }
 
-        public List<Requirement>? SelectedRequirements { get; set; }
-        public List<Cluster>? Clusters { get; set; }
+        public List<RequirementDto>? SelectedRequirements { get; set; }
+        public List<ClusterDto>? Clusters { get; set; }
 
-        public List<Requirement>? Requirements = new List<Requirement>();
+        public List<RequirementDto>? Requirements = new List<RequirementDto>();
 
 
         public CreateClusterDto ToDto()

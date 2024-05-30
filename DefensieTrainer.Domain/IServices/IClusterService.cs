@@ -12,6 +12,6 @@ namespace DefensieTrainer.Domain.IServices
 
         public void RemoveCluster(List<int> companyIds);
 
-        public List<Cluster> GetAllClusters();
+        public List<ClusterDto> GetAllClusters();
     }
 }

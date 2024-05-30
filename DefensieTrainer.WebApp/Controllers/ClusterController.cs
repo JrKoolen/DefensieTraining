@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.WebApp.Models;
 using DefensieTrainer.Domain.DTO;
+using DefensieTrainer.WebApp.Constants;
 using Microsoft.AspNetCore.Authorization;
+
 
 namespace DefensieTraining.Controllers
 {
@@ -11,7 +13,7 @@ namespace DefensieTraining.Controllers
     public class ClusterController : Controller
     {
         private readonly IClusterService _clusterService;
-        private readonly TrainingManager TrainingManager = new();
+
         private readonly IRequirementServices _requirementService;
 
 
@@ -24,7 +26,11 @@ namespace DefensieTraining.Controllers
         [Authorize(Roles = "Manager")]
         public IActionResult CreateRequirement(RequirementViewModel model)
         {
-            model.SortTrainingOptions = TrainingManager.GetTrainingOptions();
+            model.SortTrainingOptions = TrainingTypes.SortTraining.Select(tt => new SelectListItem
+            {
+                Value = tt.Key.ToString(),
+                Text = tt.Value
+            }).ToList();
 
 
             if (ModelState.IsValid)

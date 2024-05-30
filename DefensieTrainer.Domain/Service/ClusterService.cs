@@ -20,7 +20,7 @@ namespace DefensieTrainer.Domain.Service
 
         public void CreateCluster(CreateClusterDto clusterDto)
         {
-            Cluster cluster = new Cluster()
+            ClusterDto cluster = new ClusterDto()
             {
                 ClusterLevel = clusterDto.ClusterLevel,
                 Description = clusterDto.Description,
@@ -29,13 +29,13 @@ namespace DefensieTrainer.Domain.Service
             _clusterRepository.CreateCluster(cluster);
         }
 
-        public List<Cluster> GetAllClusters()
+        public List<ClusterDto> GetAllClusters()
         {
-            List<Cluster> Clusters = new List<Cluster>();
+            List<ClusterDto> Clusters = new List<ClusterDto>();
 
             foreach (var clusterDto in _clusterRepository.GetAllClusters())
             {
-                Cluster cluster = new Cluster
+                ClusterDto cluster = new ClusterDto
                 {
                     ClusterLevel = clusterDto.ClusterLevel,
                     Description = clusterDto.Description,

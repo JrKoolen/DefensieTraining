@@ -1,5 +1,4 @@
 ﻿using DefensieTrainer.Domain.DTO;
-using DefensieTrainer.Domain.Logica;
 
 namespace DefensieTrainer.Domain.IRepositories
 {
@@ -12,11 +11,8 @@ namespace DefensieTrainer.Domain.IRepositories
         void CreateUser(CreatePersonDto User);
         PersonDto GetUserByEmail(string email);
         void UpdateUser(CreatePersonDto User);
-
         void DeleteUser(int id);
-
         void DeleteUsers(int[] id);
-
         List<PersonDto> GetAllUsers();
     }
 }

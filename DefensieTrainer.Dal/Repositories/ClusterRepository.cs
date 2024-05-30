@@ -14,7 +14,7 @@ namespace DefensieTrainer.Dal.Repositories
             _connectionString = connectionString;
         }
         //TO DO  CHANGE THIS  QUERY
-        public void CreateCluster(Cluster cluster)
+        public void CreateCluster(ClusterDto cluster)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -34,7 +34,7 @@ namespace DefensieTrainer.Dal.Repositories
                     string insertRequirementsQuery = @"INSERT INTO Requirement (Cluster_id, Name, Description, SortTraining, TimeInSeconds)
                                                VALUES (@ClusterId, @Name, @Description, @SortTraining, @TimeInSeconds)";
 
-                    foreach (Requirement requirement in cluster.Requirements)
+                    foreach (RequirementDto requirement in cluster.Requirements)
                     {
                         using (var insertRequirementCommand = new MySqlCommand(insertRequirementsQuery, connection))
                         {

@@ -5,7 +5,7 @@ namespace DefensieTrainer.Domain.IRepositories
     {
         ClusterDto GetById(int id);
 
-        void CreateCluster(Cluster cluster);
+        void CreateCluster(ClusterDto cluster);
 
         void UpdateCluster(CreateClusterDto postclusterdDto);
 

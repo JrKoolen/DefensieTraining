@@ -14,10 +14,12 @@ namespace DefensieTrainer.Controllers
     public class LoginController : Controller
     {
         private readonly IPersonService _userService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public LoginController(IPersonService userService)
+        public LoginController(IPersonService userService, IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -50,6 +52,9 @@ namespace DefensieTrainer.Controllers
                     {
                         IsPersistent = model.RememberMe
                     };
+
+                    _httpContextAccessor.HttpContext.Session.SetInt32("UserId", user.Id);
+                    _httpContextAccessor.HttpContext.Session.SetInt32("ClusterId", user.ClusterId);
 
                     await HttpContext.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme,

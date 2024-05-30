@@ -7,6 +7,6 @@ public class ClusterDto
     public int ClusterLevel { get; set; }
     public string Description { get; set; }
 
-    public List<Requirement> Requirements = new List<Requirement>();
+    public List<RequirementDto> Requirements = new List<RequirementDto>();
 }
 

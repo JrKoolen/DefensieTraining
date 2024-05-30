@@ -1,46 +1,79 @@
 ﻿@model DefensieTrainer.WebApp.Models.UserTrainingViewModel;
 @using System.Security.Claims
 @inject IHttpContextAccessor HttpContextAccessor
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-*@
-@{
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit Training</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        .form-container {
+            max-width: 500px; /* Adjust the max-width to make the form smaller */
+            margin: 0 auto; /* Center the form */
+        }
 
-<form asp-action="SubmitTraining" method="post">
+        .form-control {
+            font-size: 0.875rem; /* Smaller font size */
+        }
 
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-    <div class="form-group">
-        <label asp-for="SortTraining"></label>
-        <input asp-for="SortTraining" class="form-control" />
-        <span asp-validation-for="SortTraining" class="text-danger"></span>
+            .form-header h1 {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+
+            .form-header p {
+                font-size: 1rem;
+                color: #666;
+            }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Submit Your Training</h1>
+                <p>Please fill in the details of your training session below.</p>
+            </div>
+            <form asp-action="SubmitTraining" method="post">
+                <div class="form-group">
+                    <label asp-for="SortTraining"></label>
+                    <input asp-for="SortTraining" class="form-control" />
+                    <span asp-validation-for="SortTraining" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Amount"></label>
+                    <input asp-for="Amount" class="form-control" />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TimeInSeconds"></label>
+                    <input asp-for="TimeInSeconds" class="form-control" />
+                    <span asp-validation-for="TimeInSeconds" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Meters"></label>
+                    <input asp-for="Meters" class="form-control" />
+                    <span asp-validation-for="Meters" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateTime"></label>
+                    <input asp-for="DateTime" class="form-control" />
+                    <span asp-validation-for="DateTime" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Amount"></label>
-        <input asp-for="Amount" class="form-control" />
-        <span asp-validation-for="Amount" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="TimeInSeconds"></label>
-        <input asp-for="TimeInSeconds" class="form-control" />
-        <span asp-validation-for="TimeInSeconds" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Meters"></label>
-        <input asp-for="Meters" class="form-control" />
-        <span asp-validation-for="Meters" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="DateTime"></label>
-        <input asp-for="DateTime" class="form-control" />
-        <span asp-validation-for="DateTime" class="text-danger"></span>
-    </div>
-
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

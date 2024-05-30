@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.Enums;
 using DefensieTrainer.Domain.IRepositories;
-using DefensieTrainer.Domain.Logica;
 using MySql.Data.MySqlClient;
 
 namespace DefensieTrainer.Dal.Repositories
@@ -67,8 +66,8 @@ namespace DefensieTrainer.Dal.Repositories
                                 Length = Convert.ToSingle(reader["Length"]),
                                 ArrivalDate = Convert.ToDateTime(reader["ArrivalDate"]),
                                 ArmedForce = reader["ArmedForce"].ToString(),
-                                Role = Enum.TryParse(reader["Role"].ToString(), out Role role) ? role : Role.User
-
+                                Role = Enum.TryParse(reader["Role"].ToString(), out Role role) ? role : Role.User,
+                                ClusterId = Convert.ToInt16(reader["ClusterId"]),
                             };
                         }
                     }
