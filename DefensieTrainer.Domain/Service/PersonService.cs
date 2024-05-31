@@ -18,18 +18,7 @@ namespace DefensieTrainer.Domain.Service
             PersonDto user = _personRepository.GetUserByEmail(email);
             if (user != null && user.Password == password)
             {
-                return new PersonDto
-                {
-                    Id = user.Id,
-                    Name = user.Name,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    Role = user.Role,
-                    ArmedForce = user.ArmedForce,
-                    ArrivalDate = user.ArrivalDate,
-                    Length = user.Length,
-                    Weight = user.Weight,
-                };
+                return user;
             }
             return null;
         }

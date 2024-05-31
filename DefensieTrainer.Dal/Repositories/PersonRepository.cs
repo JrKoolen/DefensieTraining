@@ -67,7 +67,7 @@ namespace DefensieTrainer.Dal.Repositories
                                 ArrivalDate = Convert.ToDateTime(reader["ArrivalDate"]),
                                 ArmedForce = reader["ArmedForce"].ToString(),
                                 Role = Enum.TryParse(reader["Role"].ToString(), out Role role) ? role : Role.User,
-                                ClusterId = Convert.ToInt16(reader["ClusterId"]),
+                                ClusterId = Convert.ToInt16(reader["Cluster_Id"]),
                             };
                         }
                     }

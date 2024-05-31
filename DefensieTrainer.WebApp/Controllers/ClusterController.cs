@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace DefensieTraining.Controllers
 {
-    //[Authorize(Roles = "Manager")]
+    [Authorize(Roles = "Manager")]
     public class ClusterController : Controller
     {
         private readonly IClusterService _clusterService;
@@ -21,7 +21,7 @@ namespace DefensieTraining.Controllers
             _requirementService = requirementService;
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult CreateRequirement(RequirementViewModel model)
         {
             model.SortTrainingOptions = TrainingTypes.SortTraining.Select(tt => new SelectListItem
@@ -38,7 +38,7 @@ namespace DefensieTraining.Controllers
             return View(model);
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult CreateCluster(ClusterViewModel model, string viewRequirements)
         {
             if (!string.IsNullOrEmpty(viewRequirements))
@@ -59,7 +59,7 @@ namespace DefensieTraining.Controllers
             
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult  ClusterManager()
         {
             
@@ -69,7 +69,7 @@ namespace DefensieTraining.Controllers
             return View(viewModel);
         }
 
-        //[Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager")]
         public IActionResult SaveClusters(ClusterViewModel model)
         {
             if (ModelState.IsValid)
@@ -92,6 +92,7 @@ namespace DefensieTraining.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Manager")]
         public IActionResult RoleAssignment()
         {
             var model = new RoleAssignmentViewModel

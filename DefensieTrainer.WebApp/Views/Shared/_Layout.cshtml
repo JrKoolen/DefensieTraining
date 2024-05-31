@@ -54,27 +54,6 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LatestTraining">New training</a>
                                 </li>
                             }
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Dashboard">User dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="NewTraining">Submit new training</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="LatestTraining">Your training</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Coach" asp-action="Index">Questions</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Cluster" asp-action="CreateRequirement">Create Requirement</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Cluster" asp-action="ClusterManager">Cluster Manager</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Cluster" asp-action="RoleAssignment">Role Assignment</a>
-                            </li>
                         </ul>
                         <ul class="navbar-nav">
                             @if (User.Identity.IsAuthenticated)

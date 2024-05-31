@@ -20,27 +20,27 @@ namespace DefensieTrainer.WebApp.Controllers
 
 
         [HttpGet]
-        //[Authorize(Roles = "User")]
+        [Authorize(Roles = "User")]
         public IActionResult Dashboard()
         {
             return View("~/Views/User/Dashboard.cshtml");
         }
 
         [HttpGet]
-        //[Authorize(Roles = "User")]
+        [Authorize(Roles = "User")]
         public IActionResult NewTraining()
         {
             return View("~/Views/User/NewTraining.cshtml");
         }
 
         [HttpGet]
-        //[Authorize(Roles = "User")]
+        [Authorize(Roles = "User")]
         public IActionResult LatestTraining()
         {
             return View("~/Views/User/LatestTraining.cshtml");
         }
 
-        //[Authorize(Roles = "User")]
+        [Authorize(Roles = "User")]
         public IActionResult NewTraining(UserTrainingViewModel model)
         {
             if (ModelState.IsValid)
