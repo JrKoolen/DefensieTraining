@@ -175,34 +175,19 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public void UpdateUser(CreatePersonDto user)
+        public void UpdateUserRole(string email, string role)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
-
                 string query = @"UPDATE Person
-                                 SET Name = @Name,
-                                     LastName = @LastName,
-                                     Email = @Email,
-                                     Password = @Password,
-                                     Weight = @Weight,
-                                     Length = @Length,
-                                     ArrivalDate = @ArrivalDate,
-                                     ArmedForce = @ArmedForce
-                                 WHERE Id = @Id";
+                         SET Role = @Role
+                         WHERE Email = @Email";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Name", user.Name);
-                    command.Parameters.AddWithValue("@LastName", user.LastName);
-                    command.Parameters.AddWithValue("@Email", user.Email);
-                    command.Parameters.AddWithValue("@Password", user.Password);
-                    command.Parameters.AddWithValue("@Weight", user.Weight);
-                    command.Parameters.AddWithValue("@Length", user.Length);
-                    command.Parameters.AddWithValue("@ArrivalDate", user.ArrivalDate);
-                    command.Parameters.AddWithValue("@ArmedForce", user.ArmedForce);
-                    command.Parameters.AddWithValue("@Id", user.Id);
+                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@Role", role);
 
                     command.ExecuteNonQuery();
                 }

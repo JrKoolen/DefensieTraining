@@ -10,7 +10,7 @@ namespace DefensieTrainer.Domain.IRepositories
 
         void CreateUser(CreatePersonDto User);
         PersonDto GetUserByEmail(string email);
-        void UpdateUser(CreatePersonDto User);
+        void UpdateUserRole(string email, string role);
         void DeleteUser(int id);
         void DeleteUsers(int[] id);
         List<PersonDto> GetAllUsers();

@@ -1,4 +1,8 @@
-﻿namespace DefensieTrainer.WebApp.Models
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using DefensieTrainer.Domain.DTO;
+using DefensieTrainer.Domain.Enums;
+
+namespace DefensieTrainer.WebApp.Models
 {
     public class RoleAssignmentViewModel
     {
@@ -9,6 +13,18 @@
         public RoleAssignmentViewModel()
         {
             Roles = new Dictionary<string, string>();
+        }
+
+        public string GetRoleName()
+        {
+            if (Enum.TryParse<Role>(SelectedRole, out Role role))
+            {
+                return role.ToString();
+            }
+            else
+            {
+                return "User";
+            }
         }
     }
 }

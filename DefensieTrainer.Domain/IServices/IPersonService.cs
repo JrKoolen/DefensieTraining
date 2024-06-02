@@ -9,7 +9,8 @@ namespace DefensieTrainer.Domain.IServices
         PersonDto GetUserById(int userId);
         IEnumerable<PersonDto> GetAllUsers();
         void CreateUser(CreatePersonDto userInput);
-        void UpdateUser(int userId, CreatePersonDto userInput);
+        void UpdateUserRole(string email, string role);
         void DeleteUser(int userId);
+
     }
 }

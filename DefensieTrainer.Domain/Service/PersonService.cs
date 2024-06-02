@@ -43,9 +43,9 @@ namespace DefensieTrainer.Domain.Service
             throw new NotImplementedException();
         }
 
-        public void UpdateUser(int userId, CreatePersonDto userInput)
+        public void UpdateUserRole(string email, string role)
         {
-            throw new NotImplementedException();
+            _personRepository.UpdateUserRole(email, role);
         }
     }
 }

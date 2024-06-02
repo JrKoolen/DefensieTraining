@@ -5,6 +5,7 @@ using DefensieTrainer.WebApp.Models;
 using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.WebApp.Constants;
 using Microsoft.AspNetCore.Authorization;
+using System.Diagnostics.Metrics;
 
 
 namespace DefensieTraining.Controllers
@@ -14,11 +15,13 @@ namespace DefensieTraining.Controllers
     {
         private readonly IClusterService _clusterService;
         private readonly IRequirementServices _requirementService;
+        private readonly IPersonService _personService;
 
-        public ClusterController(IClusterService clusterService, IRequirementServices requirementService)
+        public ClusterController(IClusterService clusterService, IRequirementServices requirementService, IPersonService personService)
         {
             _clusterService = clusterService;
             _requirementService = requirementService;
+            _personService = personService;
         }
 
         [Authorize(Roles = "Manager")]
@@ -46,23 +49,23 @@ namespace DefensieTraining.Controllers
                 int selectedRequirementId = int.Parse(viewRequirements);
             }
 
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 _clusterService.CreateCluster(model.ToDto());
                 ViewBag.CreatedCluster = true;
                 return RedirectToAction("ClusterManager");
             }
-            else 
-            { 
-                return View(model); 
+            else
+            {
+                return View(model);
             }
-            
+
         }
 
         [Authorize(Roles = "Manager")]
-        public IActionResult  ClusterManager()
+        public IActionResult ClusterManager()
         {
-            
+
             var viewModel = new ClusterViewModel();
             viewModel.Requirements = _requirementService.GetAllRequirements();
             viewModel.Clusters = _clusterService.GetAllClusters();
@@ -84,9 +87,9 @@ namespace DefensieTraining.Controllers
                     }
                 }
             }
-            else 
+            else
             {
-                return View(); 
+                return View();
             }
             return RedirectToAction("ClusterManager");
         }
@@ -103,5 +106,15 @@ namespace DefensieTraining.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AssignRole(RoleAssignmentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _personService.UpdateUserRole(model.Email, model.GetRoleName());
+            }
+            return View("Succes");
+
+        }
     }
 }
