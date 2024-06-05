@@ -1,10 +1,11 @@
-﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+﻿@model DefensieTrainer.WebApp.Models.DashboardViewModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{
     var userName = HttpContextAccessor.HttpContext.User.Identity.Name;
-    var userClusterId = HttpContextAccessor.HttpContext.Session.GetString("ClusterId");
-    var amountOfCompletedTrainings = 0; // Assuming you retrieve this from somewhere
-    var latestFinishedTraining = DateTime.MinValue; // Assuming you retrieve this from somewhere
-    var userDeadline = DateTime.MinValue; // Assuming you retrieve this from somewhere
+    var userClusterId = Model.UserClusterId;
+    var amountOfCompletedTrainings = Model.AmountOfCompletedTrainings;
+    var latestFinishedTraining = Model.LatestFinishedTraining;
+    var userDeadline = Model.UserDeadline;
 }
 
 <!DOCTYPE html>

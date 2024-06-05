@@ -13,16 +13,19 @@ namespace DefensieTrainer.Dal.Repositories
             _connectionString = connectionString;
         }
 
-        public void AddNewTraining(CreateTrainingDto training)
+        public void AddNewTraining(string Email, UserTrainingInputDto training)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
-                string query = "INSERT INTO Trainings (Name, Description, ClusterId, SortTraining, Amount, TimeInSeconds, Meters, DateTime, PersonId, ForUser) VALUES" +
-                    " (@Name, @Description, @ClusterId, @SortTraining, @Amount, @TimeInSeconds, @Meters, @DateTime, @PersonId, @ForUser)";
+                var query = @"
+                INSERT INTO Training (Person_id, SortTraining, amount, TimeInSeconds, Meters, DateTime, NeedsFeedback)
+                SELECT p.id, @SortTraining, @Amount, @TimeInSeconds, @Meters, @DateTime, @NeedsFeedback
+                FROM Person p
+                WHERE p.email = @Email";
+
                 connection.Open();
                 var command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Name", training.Name);
-                command.Parameters.AddWithValue("@Description", training.Description);
+                command.Parameters.AddWithValue("@Email", Email);
                 command.Parameters.AddWithValue("@ClusterId", training.ClusterId);
                 command.Parameters.AddWithValue("@SortTraining", training.SortTraining);
                 command.Parameters.AddWithValue("@Amount", training.Amount);
@@ -30,7 +33,7 @@ namespace DefensieTrainer.Dal.Repositories
                 command.Parameters.AddWithValue("@Meters", training.Meters);
                 command.Parameters.AddWithValue("@DateTime", training.DateTime);
                 command.Parameters.AddWithValue("@PersonId", training.PersonId);
-                command.Parameters.AddWithValue("@ForUser", training.ForUser);
+                command.Parameters.AddWithValue("@NeedsFeedback", training.NeedsFeedback);
                 command.ExecuteNonQuery();
             }
         }
@@ -71,13 +74,130 @@ namespace DefensieTrainer.Dal.Repositories
                             Meters = Convert.ToInt32(reader["Meters"]),
                             DateTime = Convert.ToDateTime(reader["DateTime"]),
                             PersonId = Convert.ToInt32(reader["PersonId"]),
-                            ForUser = Convert.ToBoolean(reader["ForUser"])
+                            NeedsFeedback = Convert.ToBoolean(reader["ForUser"])
                         };
                         trainings.Add(training);
                     }
                 }
             }
             return trainings;
+        }
+
+        public List<TrainingDto> GetAllTrainingsByEMail(string email)
+        {
+            {
+                List<TrainingDto> trainings = new List<TrainingDto>();
+                using (var connection = new MySqlConnection(_connectionString))
+                {
+                    string query = @"
+            SELECT t.Id, t.Name, t.SortTraining, 
+                   t.Amount, t.TimeInSeconds, t.Meters, t.DateTime, t.Person_Id
+            FROM Training t
+            JOIN Person p ON t.Person_Id = p.id
+            WHERE p.email = @Email";
+
+                    connection.Open();
+                    var command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Email", email);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var training = new TrainingDto
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Name = reader["Name"].ToString(),
+                                //Description = reader["Description"].ToString(),
+                                //ClusterId = Convert.ToInt32(reader["ClusterId"]),
+                                SortTraining = Convert.ToInt32(reader["SortTraining"]),
+                                Amount = Convert.ToInt32(reader["Amount"]),
+                                TimeInSeconds = Convert.ToInt32(reader["TimeInSeconds"]),
+                                Meters = Convert.ToInt32(reader["Meters"]),
+                                DateTime = Convert.ToDateTime(reader["DateTime"]),
+                                PersonId = Convert.ToInt32(reader["Person_Id"])
+                            };
+
+                            trainings.Add(training);
+                        }
+                    }
+                }
+                return trainings;
+            }
+        }
+
+        public DashboardDto GetDashboardByEmail(string email)
+        {
+            DashboardDto dashboard = null;
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                string query = @"
+        SELECT 
+            c.ClusterLevel AS ClusterLevel,
+            (SELECT COUNT(*) FROM Training t WHERE t.person_id = p.id) AS AmountOfCompletedTrainings,
+            (SELECT MAX(t.DateTime) FROM Training t WHERE t.person_id = p.id) AS LatestFinishedTraining,
+            p.ArrivalDate AS UserDeadline
+        FROM 
+            Person p
+        JOIN 
+            Cluster c ON p.cluster_id = c.id
+        WHERE 
+            p.email = @Email";
+
+                connection.Open();
+                var command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Email", email);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        dashboard = new DashboardDto
+                        {
+                            ClusterLevel = reader["ClusterLevel"].ToString(),
+                            AmountOfCompletedTrainings = Convert.ToInt32(reader["AmountOfCompletedTrainings"]),
+                            LatestFinishedTraining = reader["LatestFinishedTraining"] != DBNull.Value ? Convert.ToDateTime(reader["LatestFinishedTraining"]) : DateTime.MinValue,
+                            UserDeadline = reader["UserDeadline"] != DBNull.Value ? Convert.ToDateTime(reader["UserDeadline"]) : DateTime.MinValue
+                        };
+                    }
+                }
+            }
+            return dashboard;
+        }
+
+        public TrainingDto GetOldestTraining()
+        {
+            TrainingDto training = null;
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                string query = @"
+            SELECT * 
+            FROM Training
+            WHERE NeedsFeedback = 1 
+            ORDER BY DateTime ASC 
+            LIMIT 1"; 
+                connection.Open();
+                var command = new MySqlCommand(query, connection);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        training = new TrainingDto
+                        {
+                            Id = Convert.ToInt32(reader["id"]),
+                            Name = reader["Name"].ToString(),
+                           // Description = reader["Description"].ToString(),
+                           // ClusterId = Convert.ToInt32(reader["Cluster_Id"]),
+                            SortTraining = Convert.ToInt32(reader["SortTraining"]),
+                            Amount = Convert.ToInt32(reader["Amount"]),
+                            TimeInSeconds = Convert.ToInt32(reader["TimeInSeconds"]),
+                            Meters = Convert.ToInt32(reader["Meters"]),
+                            DateTime = Convert.ToDateTime(reader["DateTime"]),
+                            PersonId = Convert.ToInt32(reader["Person_Id"]),
+                            NeedsFeedback = Convert.ToBoolean(reader["NeedsFeedback"])
+                        };
+                    }
+                }
+            }
+            return training;
         }
 
         public TrainingDto GetTrainingById(int trainingId)
@@ -129,7 +249,7 @@ namespace DefensieTrainer.Dal.Repositories
                 command.Parameters.AddWithValue("@Meters", training.Meters);
                 command.Parameters.AddWithValue("@DateTime", training.DateTime);
                 command.Parameters.AddWithValue("@PersonId", training.PersonId);
-                command.Parameters.AddWithValue("@ForUser", training.ForUser);
+                command.Parameters.AddWithValue("@ForUser", training.NeedsFeedback);
                 command.ExecuteNonQuery();
             }
         }

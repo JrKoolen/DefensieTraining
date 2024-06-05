@@ -114,7 +114,6 @@ namespace DefensieTraining.Controllers
                 _personService.UpdateUserRole(model.Email, model.GetRoleName());
             }
             return View("Succes");
-
         }
     }
 }

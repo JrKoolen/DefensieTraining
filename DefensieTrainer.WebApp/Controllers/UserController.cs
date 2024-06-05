@@ -2,7 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DefensieTrainer.WebApp.Models;
+using Microsoft.AspNetCore.Http;
 using DefensieTrainer.Domain.DTO;
+using System.Security.Claims;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using DefensieTrainer.Domain.Service;
 
 namespace DefensieTrainer.WebApp.Controllers
 {
@@ -23,12 +27,28 @@ namespace DefensieTrainer.WebApp.Controllers
         [Authorize(Roles = "User")]
         public IActionResult Dashboard()
         {
-            return View("~/Views/User/Dashboard.cshtml");
+            if (User.Identity.IsAuthenticated)
+            {
+                string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+                DashboardDto dto =  _trainingService.GetDashboardByEmail(email);
+                var model = new DashboardViewModel
+                {
+                    UserClusterId = dto.ClusterLevel,
+                    AmountOfCompletedTrainings = dto.AmountOfCompletedTrainings,
+                    LatestFinishedTraining = dto.LatestFinishedTraining,
+                    UserDeadline = dto.UserDeadline,
+                };
+                return View(model);
+            }
+            else 
+            { 
+                return View(); 
+            }  
         }
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult NewTraining()
+        public IActionResult NewTraining(NextTrainingForUserViewModel model)
         {
             return View("~/Views/User/NewTraining.cshtml");
         }
@@ -37,20 +57,43 @@ namespace DefensieTrainer.WebApp.Controllers
         [Authorize(Roles = "User")]
         public IActionResult LatestTraining()
         {
-            return View("~/Views/User/LatestTraining.cshtml");
+            string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            TrainingDto Dto = _trainingService.CreateNewTraining(email);
+            var model = new NextTrainingForUserViewModel
+            {
+                Name = Dto.Name,
+                Description = Dto.Description,
+                Amount = Dto.Amount,
+                Meters = Dto.Meters,
+                SortTraining = Dto.SortTraining,
+                TimeInSeconds = Dto.TimeInSeconds,
+
+            };
+            return View(model);
         }
 
         [Authorize(Roles = "User")]
         public IActionResult NewTraining(UserTrainingViewModel model)
         {
+            return View("~/Views/User/NewTraining.cshtml", model);
+        }
+
+        [Authorize(Roles = "User")]
+        [HttpPost]
+        public IActionResult SubmitTraining(UserTrainingViewModel model)
+        {
+            
             if (ModelState.IsValid)
             {
-                UserTrainingInputDto input = model.ToDto();
-                input.ClusterId = _httpContextAccessor.HttpContext.Session.GetInt32("ClusterId");
-                input.ClusterId = _httpContextAccessor.HttpContext.Session.GetInt32("ClusterId");
-                return RedirectToAction("Dashboard");
+                if (User.Identity.IsAuthenticated)
+                {
+                    string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+                    _trainingService.AddNewTraining(email, model.ToDto());
+                    return RedirectToAction("Dashboard");
+                }
             }
-            return View("~/Views/User/NewTraining.cshtml", model);
+            return RedirectToAction("Dashboard");
         }
     }
 

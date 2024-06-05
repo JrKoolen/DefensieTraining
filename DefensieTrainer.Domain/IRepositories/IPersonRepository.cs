@@ -1,4 +1,5 @@
 ﻿using DefensieTrainer.Domain.DTO;
+using Newtonsoft.Json.Bson;
 
 namespace DefensieTrainer.Domain.IRepositories
 {
@@ -14,5 +15,6 @@ namespace DefensieTrainer.Domain.IRepositories
         void DeleteUser(int id);
         void DeleteUsers(int[] id);
         List<PersonDto> GetAllUsers();
+        
     }
 }

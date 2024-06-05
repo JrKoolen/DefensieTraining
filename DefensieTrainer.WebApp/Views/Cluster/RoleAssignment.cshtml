@@ -1,4 +1,7 @@
-﻿@model DefensieTrainer.WebApp.Models.RoleAssignmentViewModel
+﻿@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+@inject IHttpContextAccessor HttpContextAccessor
+@model DefensieTrainer.WebApp.Models.RoleAssignmentViewModel
 
 <!DOCTYPE html>
 <html lang="en">

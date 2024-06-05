@@ -55,6 +55,7 @@ namespace DefensieTrainer.Controllers
 
                     _httpContextAccessor.HttpContext.Session.SetInt32("UserId", user.Id);
                     _httpContextAccessor.HttpContext.Session.SetInt32("ClusterId", user.ClusterId);
+                    _httpContextAccessor.HttpContext.Session.SetString("Email", user.Email);
 
                     await HttpContext.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme,

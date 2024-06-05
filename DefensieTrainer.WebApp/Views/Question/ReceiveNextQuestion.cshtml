@@ -1,0 +1,34 @@
+﻿@model DefensieTrainer.WebApp.Models.TrainingFeedbackViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback</title>
+</head>
+<body>
+    <h1>Provide Feedback for Training: @Model.Name</h1>
+    <p>@Model.Description</p>
+    <ul>
+        <li>Amount: @Model.Amount</li>
+        <li>Meters: @Model.Meters</li>
+        <li>Sort Training:</li>
+        <ul>
+            @foreach (var item in Model.SortTraining)
+            {
+                <li>@item.Key: @item.Value</li>
+            }
+        </ul>
+        <li>Time in Seconds: @Model.TimeInSeconds</li>
+    </ul>
+
+    <form asp-action="Feedback" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="TrainingId" />
+        <div>
+            <label for="Feedback">Feedback:</label>
+            <textarea asp-for="Feedback" required></textarea>
+        </div>
+        <button type="submit">Submit Feedback</button>
+    </form>
+</body>
+</html>
