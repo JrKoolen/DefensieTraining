@@ -13,6 +13,52 @@ namespace DefensieTrainer.Dal.Repositories
             _connectionString = connectionString;
         }
 
+        public void AddFeedbackToTraining(CreateFeedbackDto dto)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                
+                var getPersonIdQuery = @"SELECT Person_id FROM Training WHERE id = @TrainingId";
+                using (var getPersonIdCommand = new MySqlCommand(getPersonIdQuery, connection))
+                {
+                    getPersonIdCommand.Parameters.AddWithValue("@TrainingId", dto.TrainingId);
+
+                    var personIdObject = getPersonIdCommand.ExecuteScalar();
+                    if (personIdObject == null || !int.TryParse(personIdObject.ToString(), out int personId))
+                    {
+                        throw new Exception("PersonId not found for the given TrainingId.");
+                    }
+                    dto.PersonId = personId;
+                }
+
+               
+                var insertFeedbackQuery = @"INSERT INTO feedback (Person_id, Training_id, Feedback) VALUES (@PersonId, @TrainingId, @Feedback)";
+                using (var insertCommand = new MySqlCommand(insertFeedbackQuery, connection))
+                {
+                    insertCommand.Parameters.AddWithValue("@PersonId", dto.PersonId);
+                    insertCommand.Parameters.AddWithValue("@TrainingId", dto.TrainingId);
+                    insertCommand.Parameters.AddWithValue("@Feedback", dto.Feedback);
+                    insertCommand.ExecuteNonQuery();
+                }
+
+                connection.Close();
+            }
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                var updateTrainingQuery = @"UPDATE Training SET NeedsFeedBack = 0 WHERE Id = @TrainingId";
+                using (var updateCommand = new MySqlCommand(updateTrainingQuery, connection))
+                {
+                    updateCommand.Parameters.AddWithValue("@TrainingId", dto.TrainingId);
+                    updateCommand.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+
         public void AddNewTraining(string Email, UserTrainingInputDto training)
         {
             using (var connection = new MySqlConnection(_connectionString))
@@ -35,6 +81,7 @@ namespace DefensieTrainer.Dal.Repositories
                 command.Parameters.AddWithValue("@PersonId", training.PersonId);
                 command.Parameters.AddWithValue("@NeedsFeedback", training.NeedsFeedback);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
         }
 
@@ -47,6 +94,7 @@ namespace DefensieTrainer.Dal.Repositories
                 var command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@TrainingId", trainingId);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
         }
 
@@ -79,6 +127,7 @@ namespace DefensieTrainer.Dal.Repositories
                         trainings.Add(training);
                     }
                 }
+                connection.Close();
             }
             return trainings;
         }
@@ -120,6 +169,7 @@ namespace DefensieTrainer.Dal.Repositories
                             trainings.Add(training);
                         }
                     }
+                    connection.Close();
                 }
                 return trainings;
             }
@@ -159,6 +209,7 @@ namespace DefensieTrainer.Dal.Repositories
                         };
                     }
                 }
+                connection.Close();
             }
             return dashboard;
         }
@@ -196,6 +247,7 @@ namespace DefensieTrainer.Dal.Repositories
                         };
                     }
                 }
+                connection.Close();
             }
             return training;
         }
@@ -227,7 +279,9 @@ namespace DefensieTrainer.Dal.Repositories
                             PersonId = Convert.ToInt32(reader["PersonId"])
                         };
                     }
+                    connection.Close();
                 }
+                
             }
             return training;
         }
@@ -251,6 +305,7 @@ namespace DefensieTrainer.Dal.Repositories
                 command.Parameters.AddWithValue("@PersonId", training.PersonId);
                 command.Parameters.AddWithValue("@ForUser", training.NeedsFeedback);
                 command.ExecuteNonQuery();
+                connection.Close();
             }
         }
     }

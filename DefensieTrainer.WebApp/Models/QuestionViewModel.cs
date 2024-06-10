@@ -1,6 +1,6 @@
 ﻿namespace DefensieTrainer.WebApp.Models
 {
-    public class QuestionViewModelcs
+    public class QuestionViewModel
     {
         public Boolean NeedsFeedBack { get; set; }
         public string Question {  get; set; }

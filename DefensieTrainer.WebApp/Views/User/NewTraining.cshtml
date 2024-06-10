@@ -1,6 +1,4 @@
-﻿@model DefensieTrainer.WebApp.Models.UserTrainingViewModel;
-@using System.Security.Claims
-@inject IHttpContextAccessor HttpContextAccessor
+﻿@model DefensieTrainer.WebApp.Models.UserTrainingViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,12 +9,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <style>
         .form-container {
-            max-width: 500px; 
-            margin: 0 auto; 
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .form-control {
-            font-size: 0.875rem; 
+            font-size: 0.875rem;
         }
 
         .form-header {
@@ -44,9 +42,12 @@
             </div>
             <form asp-action="SubmitTraining" method="post">
                 <div class="form-group">
-                    <label asp-for="SortTraining"></label>
-                    <input asp-for="SortTraining" class="form-control" />
-                    <span asp-validation-for="SortTraining" class="text-danger"></span>
+                    @Html.LabelFor(model => model.SortTraining)
+                    <select asp-for="SortTraining" class="form-control">
+                        <option value="1">hardlopen</option>
+                        <option value="2">zwemmen</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.SortTraining)
                 </div>
                 <div class="form-group">
                     <label asp-for="Amount"></label>

@@ -12,6 +12,7 @@ namespace DefensieTrainer.Domain.IRepositories
         void DeleteTraining(int trainingId);
         DashboardDto GetDashboardByEmail(string email);
         TrainingDto GetOldestTraining();
+        void AddFeedbackToTraining(CreateFeedbackDto dto);
 
 
     }

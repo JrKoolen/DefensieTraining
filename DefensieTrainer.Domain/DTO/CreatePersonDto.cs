@@ -14,6 +14,7 @@ namespace DefensieTrainer.Domain.DTO
         public DateTime ArrivalDate { get; set; }
         public string ArmedForce { get; set; }
         public Role Role { get; set; }
+        public int Cluster {  get; set; }
     }
 }
 

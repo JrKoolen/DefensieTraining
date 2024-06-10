@@ -61,9 +61,9 @@ namespace DefensieTrainer.Domain.Service
             return _trainingRepository.GetTrainingById(trainingId);
         }
 
-        public void SaveFeedBack(TrainingDto dto)
+        public void SaveFeedBack(CreateFeedbackDto dto)
         {
-            throw new NotImplementedException();
+            _trainingRepository.AddFeedbackToTraining(dto);
         }
 
         public void UpdateTraining(TrainingDto training)

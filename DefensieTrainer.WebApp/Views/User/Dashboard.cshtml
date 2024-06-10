@@ -1,22 +1,21 @@
 ﻿@model DefensieTrainer.WebApp.Models.DashboardViewModel
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
-@{
-    var userName = HttpContextAccessor.HttpContext.User.Identity.Name;
-    var userClusterId = Model.UserClusterId;
-    var amountOfCompletedTrainings = Model.AmountOfCompletedTrainings;
-    var latestFinishedTraining = Model.LatestFinishedTraining;
-    var userDeadline = Model.UserDeadline;
-}
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f5f5f5;
-            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         h1 {
@@ -41,18 +40,18 @@
     </style>
 </head>
 <body>
-    <div>
-        <h1>Welcome, @userName!</h1>
+    <div class="container">
+        <h1>Welcome, @HttpContextAccessor.HttpContext.User.Identity.Name!</h1>
 
         <div>
-            <p><strong>Cluster: </strong> @userClusterId</p>
+            <p><strong>Cluster:</strong> @Model.UserClusterId</p>
         </div>
 
         <div>
             <h2>Training Information</h2>
-            <p><strong>Total trainings</strong> @amountOfCompletedTrainings</p>
-            <p><strong>Latest Training</strong> @latestFinishedTraining.ToShortDateString()</p>
-            <p><strong>Deadline</strong> @userDeadline.ToShortDateString()</p>
+            <p><strong>Total trainings:</strong> @Model.AmountOfCompletedTrainings</p>
+            <p><strong>Latest Training:</strong> @Model.LatestFinishedTraining.ToShortDateString()</p>
+            <p><strong>Deadline:</strong> @Model.UserDeadline.ToShortDateString()</p>
         </div>
     </div>
 </body>

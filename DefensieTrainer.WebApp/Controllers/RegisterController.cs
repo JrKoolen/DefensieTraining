@@ -9,15 +9,23 @@ namespace DefensieTrainer.WebApp.Controllers
     public class RegisterController : Controller
     {
         private readonly IPersonService _userService;
-        public RegisterController(IPersonService userService)
+        private readonly IClusterService _clusterService;
+        public RegisterController(IPersonService userService, IClusterService clusterService)
         {
             _userService = userService;
+            _clusterService = clusterService;
         }
 
         [HttpGet]
         public IActionResult Register()
         {
-            return View("~/Views/Account/Register.cshtml");
+            List<ClusterDto> allClusters = _clusterService.GetAllClusters();
+            var Model = new RegisterViewModel();
+            foreach (ClusterDto cluster in allClusters)
+            {
+                Model.AppendCLusterLevel(cluster.ClusterLevel);
+            }
+            return View("~/Views/Account/Register.cshtml", Model);
         }
 
         [HttpPost]

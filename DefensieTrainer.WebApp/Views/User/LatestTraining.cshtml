@@ -1,21 +1,67 @@
 ﻿@model DefensieTrainer.WebApp.Models.NextTrainingForUserViewModel
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Latest Training</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-control {
+            font-size: 0.875rem;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .form-header h1 {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+
+            .form-header p {
+                font-size: 1rem;
+                color: #666;
+            }
+
+        .training-info ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            .training-info ul li {
+                padding: 5px 0;
+            }
+    </style>
 </head>
 <body>
-    <h1>Latest Training</h1>
-    <div>
-        <h2>@Model.Name</h2>
-        <p>@Model.Description</p>
-        <ul>
-            <li>Amount: @Model.Amount</li>
-            <li>Meters: @Model.Meters</li>
-            <li>Sort Training: @Model.SortTraining</li>
-            <li>Time in Seconds: @Model.TimeInSeconds</li>
-        </ul>
+    <div class="container mt-5">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Latest Training</h1>
+            </div>
+            <div class="training-info">
+                <h2>@Model.Name</h2>
+                <p>@Model.Description</p>
+                <ul>
+                    <li><strong>Amount:</strong> @Model.Amount</li>
+                    <li><strong>Meters:</strong> @Model.Meters</li>
+                    <li><strong>Sort Training:</strong> @Model.SortTraining</li>
+                    <li><strong>Time in Seconds:</strong> @Model.TimeInSeconds</li>
+                </ul>
+            </div>
+        </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

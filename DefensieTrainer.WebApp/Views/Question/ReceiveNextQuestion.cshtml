@@ -4,31 +4,69 @@
 <html>
 <head>
     <title>Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+    </style>
 </head>
 <body>
-    <h1>Provide Feedback for Training: @Model.Name</h1>
-    <p>@Model.Description</p>
-    <ul>
-        <li>Amount: @Model.Amount</li>
-        <li>Meters: @Model.Meters</li>
-        <li>Sort Training:</li>
+    <div class="container">
+        <h1>Provide Feedback for Training: @Model.Name</h1>
+        <p>@Model.Description</p>
         <ul>
-            @foreach (var item in Model.SortTraining)
-            {
-                <li>@item.Key: @item.Value</li>
-            }
+            <li>Amount: @Model.Amount</li>
+            <li>Meters: @Model.Meters</li>
+            <li>Sort Training: @Model.SortTraining</li>
+            <li>Time in Seconds: @Model.TimeInSeconds</li>
         </ul>
-        <li>Time in Seconds: @Model.TimeInSeconds</li>
-    </ul>
 
-    <form asp-action="Feedback" method="post">
-        @Html.AntiForgeryToken()
-        <input type="hidden" asp-for="TrainingId" />
-        <div>
-            <label for="Feedback">Feedback:</label>
-            <textarea asp-for="Feedback" required></textarea>
-        </div>
-        <button type="submit">Submit Feedback</button>
-    </form>
+        <form asp-action="Feedback" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="TrainingId" />
+            <div>
+                <label for="Feedback">Feedback:</label>
+                <textarea asp-for="Feedback" required></textarea>
+            </div>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
 </body>
 </html>

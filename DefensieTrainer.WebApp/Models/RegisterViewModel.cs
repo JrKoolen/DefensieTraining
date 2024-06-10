@@ -1,5 +1,6 @@
 ﻿using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.Enums;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
 
@@ -26,6 +27,9 @@ namespace DefensieTrainer.WebApp.Models
         public DateTime ArrivalDate { get; set; }
         [Required]
         public string ArmedForce { get; set; }
+        [Required]
+        public int Cluster {  get; set; }
+        public List<int> AllClusters { get; set; } = new List<int>();
         public Role Role = Role.User;
 
         public CreatePersonDto ToPostDto()
@@ -40,7 +44,14 @@ namespace DefensieTrainer.WebApp.Models
                 Password = this.Password,
                 ArrivalDate = this.ArrivalDate,
                 ArmedForce = this.ArmedForce,
+                Cluster = this.Cluster
+                
             };
+        }
+        
+        public void AppendCLusterLevel(int clusterLevel)
+        {
+            AllClusters.Add(clusterLevel);
         }
     }
 }

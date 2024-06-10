@@ -22,8 +22,8 @@ namespace DefensieTrainer.Dal.Repositories
             {
                 connection.Open();
 
-                string query = @"INSERT INTO Person (Name, LastName, Email, Password, Weight, Length, ArrivalDate, ArmedForce, Role)
-                                 VALUES (@Name, @LastName, @Email, @Password, @Weight, @Length, @ArrivalDate, @ArmedForce, @Role)";
+                string query = @"INSERT INTO Person (Name, LastName, Email, Password, Weight, Length, ArrivalDate, ArmedForce, Role, Cluster_id)
+                                 VALUES (@Name, @LastName, @Email, @Password, @Weight, @Length, @ArrivalDate, @ArmedForce, @Role, @Cluster_id)";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -35,7 +35,8 @@ namespace DefensieTrainer.Dal.Repositories
                     command.Parameters.AddWithValue("@Length", user.Length);
                     command.Parameters.AddWithValue("@ArrivalDate", user.ArrivalDate);
                     command.Parameters.AddWithValue("@ArmedForce", user.ArmedForce);
-                    command.Parameters.AddWithValue("@Role", user.Role);
+                    command.Parameters.AddWithValue("@Role", "User");
+                    command.Parameters.AddWithValue("@Cluster_id", user.Cluster);
 
                     command.ExecuteNonQuery();
                 }

@@ -24,12 +24,15 @@ namespace DefensieTrainer.WebApp.Controllers
             var training = _trainingService.GetOldestTraining();
             if (training == null)
             {
-                return NotFound();
+                return RedirectToAction("NoQuestionsAvailable");
             }
 
-            var sortTrainingDictionary = TrainingTypes.SortTraining
-                .ToDictionary(kvp => kvp.Key.ToString(), kvp => kvp.Value);
-
+            int trainingSortKey = training.SortTraining;
+            string sortTrainingValue;
+            if (!TrainingTypes.SortTraining.TryGetValue(trainingSortKey, out sortTrainingValue))
+            {
+                sortTrainingValue = "Default Value or Handle Null";
+            }
             var model = new TrainingFeedbackViewModel
             {
                 TrainingId = training.Id,
@@ -37,28 +40,35 @@ namespace DefensieTrainer.WebApp.Controllers
                 Description = training.Description,
                 Amount = training.Amount,
                 Meters = training.Meters,
-                SortTraining = sortTrainingDictionary, 
-                TimeInSeconds = training.TimeInSeconds
+                SortTraining = sortTrainingValue,
+                TimeInSeconds = training.TimeInSeconds,
+                PersonId = training.PersonId,
             };
-
-            return View(model);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Feedback(TrainingFeedbackViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-               // _trainingService.SaveFeedback(model.TrainingId, User.Identity.Name, model.Feedback); 
-                return RedirectToAction("FeedbackSubmitted");
-            }
-
             return View(model);
         }
 
-        public IActionResult FeedbackSubmitted()
+
+        [HttpGet]
+        public IActionResult NoQuestionsAvailable()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Feedback(TrainingFeedbackViewModel model)
+        {
+            if (model.Feedback is not null)
+            {
+                CreateFeedbackDto dto = new()
+                {
+                    TrainingId = model.TrainingId,
+                    PersonId = model.PersonId,
+                    Feedback = model.Feedback,
+                };
+                _trainingService.SaveFeedBack(dto);
+            }
+            return RedirectToAction("ReceiveNextQuestion");
         }
     }
 }
