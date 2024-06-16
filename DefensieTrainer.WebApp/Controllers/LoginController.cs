@@ -52,7 +52,6 @@ namespace DefensieTrainer.Controllers
                     {
                         IsPersistent = model.RememberMe
                     };
-
                     _httpContextAccessor.HttpContext.Session.SetInt32("UserId", user.Id);
                     _httpContextAccessor.HttpContext.Session.SetInt32("ClusterId", user.ClusterId);
                     _httpContextAccessor.HttpContext.Session.SetString("Email", user.Email);
@@ -61,8 +60,6 @@ namespace DefensieTrainer.Controllers
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
-
-
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Invalid login attempt.");

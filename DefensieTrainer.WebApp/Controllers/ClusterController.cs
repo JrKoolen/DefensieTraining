@@ -5,8 +5,6 @@ using DefensieTrainer.WebApp.Models;
 using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.WebApp.Constants;
 using Microsoft.AspNetCore.Authorization;
-using System.Diagnostics.Metrics;
-
 
 namespace DefensieTraining.Controllers
 {
@@ -59,7 +57,6 @@ namespace DefensieTraining.Controllers
             {
                 return View(model);
             }
-
         }
 
         [Authorize(Roles = "Manager")]

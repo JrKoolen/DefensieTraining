@@ -18,5 +18,6 @@ namespace DefensieTrainer.Domain.IServices
         TrainingDto CreateNewTraining(string Email);
         TrainingDto GetOldestTraining();
         void SaveFeedBack(CreateFeedbackDto dto);
+        FeedbackDto GetFeedbackByEmail(string email);
     }
 }

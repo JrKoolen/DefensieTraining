@@ -13,7 +13,6 @@ namespace DefensieTrainer.Domain.IRepositories
         DashboardDto GetDashboardByEmail(string email);
         TrainingDto GetOldestTraining();
         void AddFeedbackToTraining(CreateFeedbackDto dto);
-
-
+        FeedbackDto GetFeedbackByEmail(string email);
     }
 }

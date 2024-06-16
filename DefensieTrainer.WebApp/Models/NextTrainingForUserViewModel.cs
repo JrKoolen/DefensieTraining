@@ -1,4 +1,5 @@
-﻿namespace DefensieTrainer.WebApp.Models
+﻿using DefensieTrainer.WebApp.Constants;
+namespace DefensieTrainer.WebApp.Models
 {
     public class NextTrainingForUserViewModel
     {
@@ -9,6 +10,12 @@
         public decimal Amount { get; set; }
         public int TimeInSeconds { get; set; }
         public int Meters { get; set; }
+        public string SortTrainingString { get; private set; }
+
+        public NextTrainingForUserViewModel()
+        {
+            SortTrainingString = TrainingTypes.GetSortTrainingString(SortTraining);
+        }
     }
 }
 

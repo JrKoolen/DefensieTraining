@@ -23,7 +23,7 @@ namespace DefensieTrainer.WebApp.Models
         [Required]
         public int Meters { get; set; }
 
-        [Display(Name = "When did you do this exercise?")]
+        [Display(Name = "Do you need feedback?")]
         [Required]
         public bool NeedsFeedback { get; set; }
 

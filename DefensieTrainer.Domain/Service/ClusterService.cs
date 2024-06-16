@@ -45,7 +45,6 @@ namespace DefensieTrainer.Domain.Service
                 Clusters.Add(cluster);
             }
             return Clusters;
-
         }
 
         public void RemoveCluster(int companyId)

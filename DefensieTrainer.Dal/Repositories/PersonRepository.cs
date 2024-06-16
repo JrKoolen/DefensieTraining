@@ -133,7 +133,6 @@ namespace DefensieTrainer.Dal.Repositories
                                 Weight = Convert.ToInt32(reader["Weight"]),
                                 ArmedForce = reader["ArmedForce"].ToString(),
                                 ArrivalDate = Convert.ToDateTime(reader["ArrivalDate"])
-
                         });
                         }
                         return users;
@@ -147,13 +146,10 @@ namespace DefensieTrainer.Dal.Repositories
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
-
                 string query = "SELECT * FROM Person WHERE Id = @Id";
-
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
-
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())

@@ -2,7 +2,73 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    body {
+        background-color: white;
+    }
+
+    .nav-link-custom {
+        background-color: black !important;
+        color: white !important;
+        font-size: 1.25rem; /* Slightly bigger font size */
+        padding: 10px 20px; /* Increase padding for a bigger button */
+        border: 2px solid black; /* Add a black border to the buttons */
+        border-radius: 5px; /* Add some rounding to the button corners */
+        text-align: center; /* Center the text within the buttons */
+        display: inline-block; /* Ensure the links are displayed as block elements */
+    }
+
+    .nav-pills-custom {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 20px; /* Add some padding to the container */
+    }
+
+    .nav-item-custom {
+        margin: 10px;
+    }
+
+    .nav-container {
+        text-align: center;
+        margin-top: 50px; /* Add some top margin to move the buttons down */
+    }
+</style>
+
+<div class="container nav-container">
+    <ul class="nav nav-pills nav-pills-custom">
+        @if (User.IsInRole("Manager"))
+        {
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link nav-link-custom" asp-area="" asp-controller="Cluster" asp-action="CreateRequirement">Create Requirement</a>
+            </li>
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link nav-link-custom" asp-area="" asp-controller="Cluster" asp-action="ClusterManager">Cluster Manager</a>
+            </li>
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link nav-link-custom" asp-area="" asp-controller="Cluster" asp-action="RoleAssignment">Role Assignment</a>
+            </li>
+        }
+        @if (User.IsInRole("Coach"))
+        {
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link nav-link-custom" asp-area="" asp-controller="Question" asp-action="ReceiveNextQuestion">Questions</a>
+            </li>
+        }
+        @if (User.IsInRole("User"))
+        {
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link nav-link-custom" asp-area="" asp-controller="User" asp-action="Dashboard">User Dashboard</a>
+            </li>
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link nav-link-custom" asp-area="" asp-controller="User" asp-action="NewTraining">New Training</a>
+            </li>
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link nav-link-custom" asp-area="" asp-controller="User" asp-action="LatestTraining">Your New Training</a>
+            </li>
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link nav-link-custom" asp-area="" asp-controller="User" asp-action="Feedback">Feedback</a>
+            </li>
+        }
+    </ul>
 </div>

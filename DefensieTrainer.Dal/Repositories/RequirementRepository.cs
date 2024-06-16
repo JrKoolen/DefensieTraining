@@ -5,57 +5,43 @@ using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IRepositories;
 using System.Xml.Linq;
 
-public class RequirementRepository : IRequirementRepository
+
+namespace DefensieTrainer.Dal.Repositories
 {
-    private readonly string _connectionString;
-
-    public RequirementRepository(string connectionString)
+    public class RequirementRepository : IRequirementRepository
     {
-        _connectionString = connectionString;
-    }
+        private readonly string _connectionString;
 
-
-    public void CreateRequirement(CreateRequirementDto requirement)
-    {
-        using (var connection = new MySqlConnection(_connectionString))
+        public RequirementRepository(string connectionString)
         {
-            connection.Open();
-            string query = @"INSERT INTO Requirement (Cluster_id, Name, Description, SortTraining, TimeInSeconds)
+            _connectionString = connectionString;
+        }
+
+
+        public void CreateRequirement(CreateRequirementDto requirement)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = @"INSERT INTO Requirement (Cluster_id, Name, Description, SortTraining, TimeInSeconds)
                          VALUES (@ClusterId, @Name, @Description, @SortTraining, @TimeInSeconds)";
-            using (var command = new MySqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@ClusterId", requirement.ClusterId);
-                command.Parameters.AddWithValue("@Name", requirement.Name);
-                command.Parameters.AddWithValue("@Description", requirement.Description);
-                command.Parameters.AddWithValue("@SortTraining", requirement.SortTraining);
-                command.Parameters.AddWithValue("@TimeInSeconds", requirement.TimeInSeconds);
-                command.ExecuteNonQuery();
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ClusterId", requirement.ClusterId);
+                    command.Parameters.AddWithValue("@Name", requirement.Name);
+                    command.Parameters.AddWithValue("@Description", requirement.Description);
+                    command.Parameters.AddWithValue("@SortTraining", requirement.SortTraining);
+                    command.Parameters.AddWithValue("@TimeInSeconds", requirement.TimeInSeconds);
+                    command.ExecuteNonQuery();
+                }
             }
         }
-    }
 
-    public void DeleteRequirement(int id)
-    {
-        using (var connection = new MySqlConnection(_connectionString))
+        public void DeleteRequirement(int id)
         {
-            connection.Open();
-            string query = "DELETE FROM Requirement WHERE id = @Id";
-            using (var command = new MySqlCommand(query, connection))
+            using (var connection = new MySqlConnection(_connectionString))
             {
-                command.Parameters.AddWithValue("@Id", id);
-                command.ExecuteNonQuery();
-            }
-        }
-    }
-
-
-    public void DeleteRequirements(int[] ids)
-    {
-        using (var connection = new MySqlConnection(_connectionString))
-        {
-            connection.Open();
-            foreach (int id in ids)
-            {
+                connection.Open();
                 string query = "DELETE FROM Requirement WHERE id = @Id";
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -64,79 +50,96 @@ public class RequirementRepository : IRequirementRepository
                 }
             }
         }
-    }
 
-    public List<RequirementDto> GetAllRequirements()
-    {
-        List<RequirementDto> requirements = new List<RequirementDto>();
 
-        using (var connection = new MySqlConnection(_connectionString))
+        public void DeleteRequirements(int[] ids)
         {
-            connection.Open();
-            string query = "SELECT * FROM Requirement";
-            using (var command = new MySqlCommand(query, connection))
+            using (var connection = new MySqlConnection(_connectionString))
             {
-                using (var reader = command.ExecuteReader())
+                connection.Open();
+                foreach (int id in ids)
                 {
-                    while (reader.Read())
+                    string query = "DELETE FROM Requirement WHERE id = @Id";
+                    using (var command = new MySqlCommand(query, connection))
                     {
-                        RequirementDto requirement = new RequirementDto
-                        {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
-                            Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString(),
-                            ClusterId = reader["Cluster_id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Cluster_id"]),
-                            SortTraining = reader["SortTraining"] == DBNull.Value ? 0 : Convert.ToInt32(reader["SortTraining"]),
-                            Amount = reader["Amount"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Amount"]),
-                            TimeInSeconds = reader["TimeInSeconds"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TimeInSeconds"])
-                        };
-                        requirements.Add(requirement);
+                        command.Parameters.AddWithValue("@Id", id);
+                        command.ExecuteNonQuery();
                     }
                 }
             }
         }
 
-        return requirements;
-    }
-
-
-    public RequirementDto GetById(int id)
-    {
-        using (var connection = new MySqlConnection(_connectionString))
+        public List<RequirementDto> GetAllRequirements()
         {
-            connection.Open();
-            string query = "SELECT * FROM Requirement WHERE id = @Id";
-            using (var command = new MySqlCommand(query, connection))
+            List<RequirementDto> requirements = new List<RequirementDto>();
+
+            using (var connection = new MySqlConnection(_connectionString))
             {
-                command.Parameters.AddWithValue("@Id", id);
-                using (var reader = command.ExecuteReader())
+                connection.Open();
+                string query = "SELECT * FROM Requirement";
+                using (var command = new MySqlCommand(query, connection))
                 {
-                    if (reader.Read())
+                    using (var reader = command.ExecuteReader())
                     {
-                        RequirementDto requirement = new RequirementDto
+                        while (reader.Read())
                         {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
-                            Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString(),
-                            ClusterId = reader["Cluster_id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Cluster_id"]),
-                            SortTraining = reader["SortTraining"] == DBNull.Value ? 0 : Convert.ToInt32(reader["SortTraining"]),
-                            Amount = reader["Amount"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Amount"]),
-                            TimeInSeconds = reader["TimeInSeconds"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TimeInSeconds"])
-                        };
-                        return requirement;
+                            RequirementDto requirement = new RequirementDto
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
+                                Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString(),
+                                ClusterId = reader["Cluster_id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Cluster_id"]),
+                                SortTraining = reader["SortTraining"] == DBNull.Value ? 0 : Convert.ToInt32(reader["SortTraining"]),
+                                Amount = reader["Amount"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Amount"]),
+                                TimeInSeconds = reader["TimeInSeconds"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TimeInSeconds"])
+                            };
+                            requirements.Add(requirement);
+                        }
                     }
-                    return null;
+                }
+            }
+
+            return requirements;
+        }
+
+
+        public RequirementDto GetById(int id)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Requirement WHERE id = @Id";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", id);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            RequirementDto requirement = new RequirementDto
+                            {
+                                Id = Convert.ToInt32(reader["Id"]),
+                                Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
+                                Description = reader["Description"] == DBNull.Value ? null : reader["Description"].ToString(),
+                                ClusterId = reader["Cluster_id"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Cluster_id"]),
+                                SortTraining = reader["SortTraining"] == DBNull.Value ? 0 : Convert.ToInt32(reader["SortTraining"]),
+                                Amount = reader["Amount"] == DBNull.Value ? 0 : Convert.ToInt32(reader["Amount"]),
+                                TimeInSeconds = reader["TimeInSeconds"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TimeInSeconds"])
+                            };
+                            return requirement;
+                        }
+                        return null;
+                    }
                 }
             }
         }
-    }
 
-    public void UpdateRequirement(RequirementDto requirement)
-    {
-        using (var connection = new MySqlConnection(_connectionString))
+        public void UpdateRequirement(RequirementDto requirement)
         {
-            connection.Open();
-            string query = @"UPDATE Requirement 
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                connection.Open();
+                string query = @"UPDATE Requirement 
                              SET Cluster_id = @ClusterId, 
                                  Name = @Name, 
                                  Description = @Description, 
@@ -144,18 +147,19 @@ public class RequirementRepository : IRequirementRepository
                                  Amount = @Amount, 
                                  TimeInSeconds = @TimeInSeconds 
                              WHERE id = @Id";
-            using (var command = new MySqlCommand(query, connection))
-            {
-                command.Parameters.AddWithValue("@ClusterId", requirement.ClusterId);
-                command.Parameters.AddWithValue("@RequiredName", requirement.Name);
-                command.Parameters.AddWithValue("@Description", requirement.Description);
-                command.Parameters.AddWithValue("@SortTraining", requirement.SortTraining);
-                command.Parameters.AddWithValue("@RequiredAmount", requirement.SortTraining);
-                command.Parameters.AddWithValue("@TimeInSeconds", requirement.TimeInSeconds);
-                command.Parameters.AddWithValue("@Id", requirement.Id);
-                command.ExecuteNonQuery();
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ClusterId", requirement.ClusterId);
+                    command.Parameters.AddWithValue("@RequiredName", requirement.Name);
+                    command.Parameters.AddWithValue("@Description", requirement.Description);
+                    command.Parameters.AddWithValue("@SortTraining", requirement.SortTraining);
+                    command.Parameters.AddWithValue("@RequiredAmount", requirement.SortTraining);
+                    command.Parameters.AddWithValue("@TimeInSeconds", requirement.TimeInSeconds);
+                    command.Parameters.AddWithValue("@Id", requirement.Id);
+                    command.ExecuteNonQuery();
+                }
             }
         }
-    }
 
+    }
 }

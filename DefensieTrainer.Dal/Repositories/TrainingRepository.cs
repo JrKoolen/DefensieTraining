@@ -220,11 +220,11 @@ namespace DefensieTrainer.Dal.Repositories
             using (var connection = new MySqlConnection(_connectionString))
             {
                 string query = @"
-            SELECT * 
-            FROM Training
-            WHERE NeedsFeedback = 1 
-            ORDER BY DateTime ASC 
-            LIMIT 1"; 
+                SELECT * 
+                ROM Training
+                WHERE NeedsFeedback = 1 
+                ORDER BY DateTime ASC 
+                LIMIT 1"; 
                 connection.Open();
                 var command = new MySqlCommand(query, connection);
                 using (var reader = command.ExecuteReader())
@@ -306,6 +306,39 @@ namespace DefensieTrainer.Dal.Repositories
                 command.Parameters.AddWithValue("@ForUser", training.NeedsFeedback);
                 command.ExecuteNonQuery();
                 connection.Close();
+            }
+        }
+
+
+        public FeedbackDto GetFeedbackByEmail(string email)
+        {
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                FeedbackDto feedback = null;
+                string query = @"
+        SELECT f.* 
+        FROM Feedback f
+        INNER JOIN Person p ON f.Person_id = p.id
+        WHERE p.email = @Email
+        ORDER BY f.id DESC
+        LIMIT 1";
+
+                var command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Email", email);
+
+                connection.Open(); // Ensure the connection is opened before executing the command
+                using (var reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        feedback = new FeedbackDto
+                        {
+                            Feedback = reader["Feedback"].ToString()
+                        };
+                    }
+                }
+                connection.Close(); // Ensure the connection is closed
+                return feedback;
             }
         }
     }

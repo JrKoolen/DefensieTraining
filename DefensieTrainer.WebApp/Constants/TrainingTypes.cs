@@ -4,8 +4,19 @@
     {
         public static readonly Dictionary<int, string> SortTraining = new Dictionary<int, string>
         {
-            { 1, "hardlopen" },
-            { 2, "zwemmen" }
+            { 0, "hardlopen" },
+            { 1, "zwemmen" }
         };
+        public static string GetSortTrainingString(int key)
+        {
+            if (SortTraining.ContainsKey(key))
+            {
+                return SortTraining[key];
+            }
+            else
+            {
+                throw new KeyNotFoundException($"Key {key} not found in SortTraining dictionary.");
+            }
+        }
     }
 }

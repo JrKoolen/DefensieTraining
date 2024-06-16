@@ -7,6 +7,7 @@ using DefensieTrainer.Domain.DTO;
 using System.Security.Claims;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using DefensieTrainer.Domain.Service;
+using System.Transactions;
 
 namespace DefensieTrainer.WebApp.Controllers
 {
@@ -81,8 +82,7 @@ namespace DefensieTrainer.WebApp.Controllers
         [Authorize(Roles = "User")]
         [HttpPost]
         public IActionResult SubmitTraining(UserTrainingViewModel model)
-        {
-            
+        { 
             if (ModelState.IsValid)
             {
                 if (User.Identity.IsAuthenticated)
@@ -94,6 +94,19 @@ namespace DefensieTrainer.WebApp.Controllers
                 }
             }
             return RedirectToAction("Dashboard");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult Feedback()
+        {
+            string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            FeedbackDto dto = _trainingService.GetFeedbackByEmail(email);
+            var model = new FeedbackViewModel
+            {
+                Feedback = dto.Feedback
+            };
+            return View("~/Views/User/Feedback.cshtml", model);
         }
     }
 

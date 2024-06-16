@@ -6,7 +6,7 @@
         {
             { 1, "User" },
             { 2, "Coach" },
-            {3, "Manager" }
+            { 3, "Manager" }
         };
     }
 }

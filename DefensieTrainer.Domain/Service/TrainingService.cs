@@ -34,7 +34,7 @@ namespace DefensieTrainer.Domain.Service
             }
             TrainingDto newTrainingSession = newTrainingSessions.First();
             return newTrainingSession;
-    }
+        }
 
     public void DeleteTraining(int trainingId)
         {
@@ -70,6 +70,12 @@ namespace DefensieTrainer.Domain.Service
         {
             _trainingRepository.UpdateTraining(training);
         }
+
+        public FeedbackDto GetFeedbackByEmail(string email)
+        {
+            return _trainingRepository.GetFeedbackByEmail(email);
+        }
+
 
     }
 }
