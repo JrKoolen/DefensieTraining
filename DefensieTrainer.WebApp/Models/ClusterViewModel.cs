@@ -1,8 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Runtime.InteropServices;
 using DefensieTrainer.Domain.DTO;
-
 
 namespace DefensieTrainer.WebApp.Models
 {

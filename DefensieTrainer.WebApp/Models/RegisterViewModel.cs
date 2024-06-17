@@ -2,7 +2,6 @@
 using DefensieTrainer.Domain.Enums;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices;
 
 namespace DefensieTrainer.WebApp.Models
 {

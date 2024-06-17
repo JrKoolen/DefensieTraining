@@ -1,5 +1,4 @@
-﻿using DefensieTrainer.Dal.Repositories;
-using DefensieTrainer.Domain.DTO;
+﻿using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.WebApp.Constants;
 using DefensieTrainer.WebApp.Models;

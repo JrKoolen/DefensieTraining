@@ -5,7 +5,6 @@ using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IRepositories;
 using System.Xml.Linq;
 
-
 namespace DefensieTrainer.Dal.Repositories
 {
     public class RequirementRepository : IRequirementRepository
@@ -16,7 +15,6 @@ namespace DefensieTrainer.Dal.Repositories
         {
             _connectionString = connectionString;
         }
-
 
         public void CreateRequirement(CreateRequirementDto requirement)
         {
@@ -50,7 +48,6 @@ namespace DefensieTrainer.Dal.Repositories
                 }
             }
         }
-
 
         public void DeleteRequirements(int[] ids)
         {
@@ -98,10 +95,8 @@ namespace DefensieTrainer.Dal.Repositories
                     }
                 }
             }
-
             return requirements;
         }
-
 
         public RequirementDto GetById(int id)
         {

@@ -1,6 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using DefensieTrainer.Domain.DTO;
-using DefensieTrainer.Domain.Enums;
+﻿using DefensieTrainer.Domain.Enums;
 
 namespace DefensieTrainer.WebApp.Models
 {

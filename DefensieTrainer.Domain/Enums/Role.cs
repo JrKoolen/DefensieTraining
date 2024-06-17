@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DefensieTrainer.Domain.Enums
+﻿namespace DefensieTrainer.Domain.Enums
 {
     public enum Role
     {

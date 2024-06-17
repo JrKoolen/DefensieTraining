@@ -1,4 +1,5 @@
 ﻿using DefensieTrainer.WebApp.Constants;
+
 namespace DefensieTrainer.WebApp.Models
 {
     public class NextTrainingForUserViewModel

@@ -2,12 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DefensieTrainer.WebApp.Models;
-using Microsoft.AspNetCore.Http;
 using DefensieTrainer.Domain.DTO;
 using System.Security.Claims;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
-using DefensieTrainer.Domain.Service;
-using System.Transactions;
 
 namespace DefensieTrainer.WebApp.Controllers
 {

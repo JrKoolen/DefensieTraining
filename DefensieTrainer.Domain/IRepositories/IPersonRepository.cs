@@ -1,5 +1,4 @@
 ﻿using DefensieTrainer.Domain.DTO;
-using Newtonsoft.Json.Bson;
 
 namespace DefensieTrainer.Domain.IRepositories
 {

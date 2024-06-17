@@ -1,12 +1,7 @@
 ﻿using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.IRepositories;
-using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.Domain.Service;
-using Microsoft.AspNetCore.Authentication;
 using Moq;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace DefensieTrainer.UnitTests
 {

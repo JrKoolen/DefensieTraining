@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using DefensieTrainer.Domain.DTO;
+﻿using DefensieTrainer.Domain.DTO;
 using DefensieTrainer.Domain.Enums;
 using DefensieTrainer.Domain.IRepositories;
 using MySql.Data.MySqlClient;

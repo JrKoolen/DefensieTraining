@@ -1,6 +1,5 @@
 ﻿using DefensieTrainer.Domain.DTO;
 
-
 namespace DefensieTrainer.Domain.IServices
 {
     public interface IPersonService
@@ -11,6 +10,5 @@ namespace DefensieTrainer.Domain.IServices
         void CreateUser(CreatePersonDto userInput);
         void UpdateUserRole(string email, string role);
         void DeleteUser(int userId);
-
     }
 }

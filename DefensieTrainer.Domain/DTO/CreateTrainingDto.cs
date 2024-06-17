@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DefensieTrainer.Domain.DTO
+﻿namespace DefensieTrainer.Domain.DTO
 {
     public class CreateTrainingDto
     {
@@ -18,6 +12,5 @@ namespace DefensieTrainer.Domain.DTO
         public DateTime DateTime { get; set; }
         public int PersonId { get; set; }
         public Boolean ForUser { get; set; }
-
     }
 }

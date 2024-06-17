@@ -42,7 +42,6 @@ namespace DefensieTrainer.Dal.Repositories
                     insertCommand.Parameters.AddWithValue("@Feedback", dto.Feedback);
                     insertCommand.ExecuteNonQuery();
                 }
-
                 connection.Close();
             }
 
@@ -165,7 +164,6 @@ namespace DefensieTrainer.Dal.Repositories
                                 DateTime = Convert.ToDateTime(reader["DateTime"]),
                                 PersonId = Convert.ToInt32(reader["Person_Id"])
                             };
-
                             trainings.Add(training);
                         }
                     }
@@ -308,7 +306,6 @@ namespace DefensieTrainer.Dal.Repositories
                 connection.Close();
             }
         }
-
 
         public FeedbackDto GetFeedbackByEmail(string email)
         {

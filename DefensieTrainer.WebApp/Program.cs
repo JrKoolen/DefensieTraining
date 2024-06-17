@@ -3,10 +3,6 @@ using DefensieTrainer.Domain.IRepositories;
 using DefensieTrainer.Domain.IServices;
 using DefensieTrainer.Domain.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 

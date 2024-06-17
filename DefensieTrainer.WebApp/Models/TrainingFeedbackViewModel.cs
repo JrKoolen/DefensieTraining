@@ -1,7 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-using DefensieTrainer.Domain.DTO;
-using DefensieTrainer.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DefensieTrainer.WebApp.Models
 {

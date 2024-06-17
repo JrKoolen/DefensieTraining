@@ -1,4 +1,5 @@
 ﻿using DefensieTrainer.Domain.DTO;
+
 namespace DefensieTrainer.Domain.IRepositories
 {
     public interface IClusterRepository
