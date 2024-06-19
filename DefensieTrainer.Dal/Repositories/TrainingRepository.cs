@@ -58,7 +58,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public void AddNewTraining(string Email, UserTrainingInputDto training)
+        public void AddNewTraining(string Email, CreateUserTrainingDto training)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -97,9 +97,9 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public List<TrainingDto> GetAllTrainings()
+        public List<ReadTrainingDto> GetAllTrainings()
         {
-            var trainings = new List<TrainingDto>();
+            var trainings = new List<ReadTrainingDto>();
             using (var connection = new MySqlConnection(_connectionString))
             {
                 string query = "SELECT * FROM Trainings";
@@ -109,7 +109,7 @@ namespace DefensieTrainer.Dal.Repositories
                 {
                     while (reader.Read())
                     {
-                        var training = new TrainingDto
+                        var training = new ReadTrainingDto
                         {
                             Id = Convert.ToInt32(reader["TrainingId"]),
                             Name = reader["Name"].ToString(),
@@ -131,10 +131,10 @@ namespace DefensieTrainer.Dal.Repositories
             return trainings;
         }
 
-        public List<TrainingDto> GetAllTrainingsByEMail(string email)
+        public List<ReadTrainingDto> GetAllTrainingsByEMail(string email)
         {
             {
-                List<TrainingDto> trainings = new List<TrainingDto>();
+                List<ReadTrainingDto> trainings = new List<ReadTrainingDto>();
                 using (var connection = new MySqlConnection(_connectionString))
                 {
                     string query = @"
@@ -151,7 +151,7 @@ namespace DefensieTrainer.Dal.Repositories
                     {
                         while (reader.Read())
                         {
-                            var training = new TrainingDto
+                            var training = new ReadTrainingDto
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"].ToString(),
@@ -173,9 +173,9 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public DashboardDto GetDashboardByEmail(string email)
+        public ReadDashboardDto GetDashboardByEmail(string email)
         {
-            DashboardDto dashboard = null;
+            ReadDashboardDto dashboard = null;
             using (var connection = new MySqlConnection(_connectionString))
             {
                 string query = @"
@@ -198,7 +198,7 @@ namespace DefensieTrainer.Dal.Repositories
                 {
                     if (reader.Read())
                     {
-                        dashboard = new DashboardDto
+                        dashboard = new ReadDashboardDto
                         {
                             ClusterLevel = reader["ClusterLevel"].ToString(),
                             AmountOfCompletedTrainings = Convert.ToInt32(reader["AmountOfCompletedTrainings"]),
@@ -212,9 +212,9 @@ namespace DefensieTrainer.Dal.Repositories
             return dashboard;
         }
 
-        public TrainingDto GetOldestTraining()
+        public ReadTrainingDto GetOldestTraining()
         {
-            TrainingDto training = null;
+            ReadTrainingDto training = null;
             using (var connection = new MySqlConnection(_connectionString))
             {
                 string query = @"
@@ -229,7 +229,7 @@ namespace DefensieTrainer.Dal.Repositories
                 {
                     if (reader.Read())
                     {
-                        training = new TrainingDto
+                        training = new ReadTrainingDto
                         {
                             Id = Convert.ToInt32(reader["id"]),
                             Name = reader["Name"].ToString(),
@@ -250,9 +250,9 @@ namespace DefensieTrainer.Dal.Repositories
             return training;
         }
 
-        public TrainingDto GetTrainingById(int trainingId)
+        public ReadTrainingDto GetTrainingById(int trainingId)
         {
-            TrainingDto training = null;
+            ReadTrainingDto training = null;
             using (var connection = new MySqlConnection(_connectionString))
             {
                 string query = "SELECT * FROM Trainings WHERE TrainingId = @TrainingId";
@@ -263,7 +263,7 @@ namespace DefensieTrainer.Dal.Repositories
                 {
                     if (reader.Read())
                     {
-                        training = new TrainingDto
+                        training = new ReadTrainingDto
                         {
                             Id = Convert.ToInt32(reader["TrainingId"]),
                             Name = reader["Name"].ToString(),
@@ -284,7 +284,7 @@ namespace DefensieTrainer.Dal.Repositories
             return training;
         }
 
-        public void UpdateTraining(TrainingDto training)
+        public void UpdateTraining(ReadTrainingDto training)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -307,11 +307,11 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public FeedbackDto GetFeedbackByEmail(string email)
+        public ReadFeedbackDto GetFeedbackByEmail(string email)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
-                FeedbackDto feedback = null;
+                ReadFeedbackDto feedback = null;
                 string query = @"
         SELECT f.* 
         FROM Feedback f
@@ -328,7 +328,7 @@ namespace DefensieTrainer.Dal.Repositories
                 {
                     if (reader.Read())
                     {
-                        feedback = new FeedbackDto
+                        feedback = new ReadFeedbackDto
                         {
                             Feedback = reader["Feedback"].ToString()
                         };

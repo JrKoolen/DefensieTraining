@@ -17,22 +17,22 @@ namespace DefensieTrainer.Domain.Service
             _trainingCreator = new TrainingCreator();
         }
 
-        public void AddNewTraining(string Email, UserTrainingInputDto training)
+        public void AddNewTraining(string Email, CreateUserTrainingDto training)
         {
             _trainingRepository.AddNewTraining(Email, training);
         }
 
-        public TrainingDto CreateNewTraining(string email)
+        public ReadTrainingDto CreateNewTraining(string email)
         {
-            List<TrainingDto> allTrainings = _trainingRepository.GetAllTrainingsByEMail(email);
+            List<ReadTrainingDto> allTrainings = _trainingRepository.GetAllTrainingsByEMail(email);
 
             _trainingCreator.AllTrainings = allTrainings;
-            List<TrainingDto> newTrainingSessions = _trainingCreator.CreateNewTraining(1); 
+            List<ReadTrainingDto> newTrainingSessions = _trainingCreator.CreateNewTraining(1); 
             if (newTrainingSessions == null || newTrainingSessions.Count == 0)
             {
                 return null;
             }
-            TrainingDto newTrainingSession = newTrainingSessions.First();
+            ReadTrainingDto newTrainingSession = newTrainingSessions.First();
             return newTrainingSession;
         }
 
@@ -41,22 +41,22 @@ namespace DefensieTrainer.Domain.Service
             _trainingRepository.DeleteTraining(trainingId);
         }
 
-        public List<TrainingDto> GetAllTrainings()
+        public List<ReadTrainingDto> GetAllTrainings()
         {
             return _trainingRepository.GetAllTrainings();
         }
 
-        public DashboardDto GetDashboardByEmail(string email)
+        public ReadDashboardDto GetDashboardByEmail(string email)
         {
             return _trainingRepository.GetDashboardByEmail(email);
         }
 
-        public TrainingDto GetOldestTraining()
+        public ReadTrainingDto GetOldestTraining()
         {
             return _trainingRepository.GetOldestTraining();
         }
 
-        public TrainingDto GetTrainingById(int trainingId)
+        public ReadTrainingDto GetTrainingById(int trainingId)
         {
             return _trainingRepository.GetTrainingById(trainingId);
         }
@@ -66,12 +66,12 @@ namespace DefensieTrainer.Domain.Service
             _trainingRepository.AddFeedbackToTraining(dto);
         }
 
-        public void UpdateTraining(TrainingDto training)
+        public void UpdateTraining(ReadTrainingDto training)
         {
             _trainingRepository.UpdateTraining(training);
         }
 
-        public FeedbackDto GetFeedbackByEmail(string email)
+        public ReadFeedbackDto GetFeedbackByEmail(string email)
         {
             return _trainingRepository.GetFeedbackByEmail(email);
         }

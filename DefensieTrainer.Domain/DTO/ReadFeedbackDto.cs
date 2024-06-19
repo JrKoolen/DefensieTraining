@@ -1,6 +1,6 @@
 ﻿namespace DefensieTrainer.Domain.DTO
 {
-    public class FeedbackDto
+    public class ReadFeedbackDto
     {
         public string Feedback { get; set; }
     }

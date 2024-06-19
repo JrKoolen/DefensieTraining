@@ -4,17 +4,17 @@ namespace DefensieTrainer.Domain.IRepositories
 {
     public interface IRequirementRepository
     {
-        RequirementDto GetById(int id);
+        ReadRequirementDto GetById(int id);
 
         void CreateRequirement(CreateRequirementDto requirement);
 
-        void UpdateRequirement(RequirementDto requirement);
+        void UpdateRequirement(ReadRequirementDto requirement);
 
         void DeleteRequirement(int id);
 
         void DeleteRequirements(int[] id);
 
-        List<RequirementDto> GetAllRequirements();
+        List<ReadRequirementDto> GetAllRequirements();
 
     }
 }

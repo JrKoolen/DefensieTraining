@@ -4,15 +4,15 @@ namespace DefensieTrainer.Domain.IRepositories
 {
     public interface ITrainingRepository
     {
-        void AddNewTraining(string Email, UserTrainingInputDto training);
-        TrainingDto GetTrainingById(int trainingId);
-        List<TrainingDto> GetAllTrainingsByEMail(string email);
-        List<TrainingDto> GetAllTrainings();
-        void UpdateTraining(TrainingDto training);
+        void AddNewTraining(string Email, CreateUserTrainingDto training);
+        ReadTrainingDto GetTrainingById(int trainingId);
+        List<ReadTrainingDto> GetAllTrainingsByEMail(string email);
+        List<ReadTrainingDto> GetAllTrainings();
+        void UpdateTraining(ReadTrainingDto training);
         void DeleteTraining(int trainingId);
-        DashboardDto GetDashboardByEmail(string email);
-        TrainingDto GetOldestTraining();
+        ReadDashboardDto GetDashboardByEmail(string email);
+        ReadTrainingDto GetOldestTraining();
         void AddFeedbackToTraining(CreateFeedbackDto dto);
-        FeedbackDto GetFeedbackByEmail(string email);
+        ReadFeedbackDto GetFeedbackByEmail(string email);
     }
 }

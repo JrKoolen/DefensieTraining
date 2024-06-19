@@ -1,6 +1,6 @@
 ﻿namespace DefensieTrainer.Domain.DTO
 {
-    public class DashboardDto
+    public class ReadDashboardDto
     {
         public string ClusterLevel { get; set; }
         public int AmountOfCompletedTrainings { get; set; }

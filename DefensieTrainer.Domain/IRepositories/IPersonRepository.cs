@@ -6,14 +6,14 @@ namespace DefensieTrainer.Domain.IRepositories
     {
 
 
-        PersonDto GetById(int id);
+        ReadPersonDto GetById(int id);
 
         void CreateUser(CreatePersonDto User);
-        PersonDto GetUserByEmail(string email);
+        ReadPersonDto GetUserByEmail(string email);
         void UpdateUserRole(string email, string role);
         void DeleteUser(int id);
         void DeleteUsers(int[] id);
-        List<PersonDto> GetAllUsers();
+        List<ReadPersonDto> GetAllUsers();
         
     }
 }

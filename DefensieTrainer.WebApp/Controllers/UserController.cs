@@ -27,7 +27,7 @@ namespace DefensieTrainer.WebApp.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-                DashboardDto dto =  _trainingService.GetDashboardByEmail(email);
+                ReadDashboardDto dto =  _trainingService.GetDashboardByEmail(email);
                 var model = new DashboardViewModel
                 {
                     UserClusterId = dto.ClusterLevel,
@@ -55,7 +55,7 @@ namespace DefensieTrainer.WebApp.Controllers
         public IActionResult LatestTraining()
         {
             string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            TrainingDto Dto = _trainingService.CreateNewTraining(email);
+            ReadTrainingDto Dto = _trainingService.CreateNewTraining(email);
             var model = new NextTrainingForUserViewModel
             {
                 Name = Dto.Name,
@@ -97,7 +97,7 @@ namespace DefensieTrainer.WebApp.Controllers
         public IActionResult Feedback()
         {
             string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-            FeedbackDto dto = _trainingService.GetFeedbackByEmail(email);
+            ReadFeedbackDto dto = _trainingService.GetFeedbackByEmail(email);
             var model = new FeedbackViewModel
             {
                 Feedback = dto.Feedback

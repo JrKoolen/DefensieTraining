@@ -9,15 +9,15 @@ namespace DefensieTrainer.Domain.IServices
 {
     public interface ITrainingService
     {
-        void AddNewTraining(string Email, UserTrainingInputDto training);
+        void AddNewTraining(string Email, CreateUserTrainingDto training);
         void DeleteTraining(int trainingId);
-        List<TrainingDto> GetAllTrainings();
-        TrainingDto GetTrainingById(int trainingId);
-        void UpdateTraining(TrainingDto training);
-        DashboardDto GetDashboardByEmail(string email);
-        TrainingDto CreateNewTraining(string Email);
-        TrainingDto GetOldestTraining();
+        List<ReadTrainingDto> GetAllTrainings();
+        ReadTrainingDto GetTrainingById(int trainingId);
+        void UpdateTraining(ReadTrainingDto training);
+        ReadDashboardDto GetDashboardByEmail(string email);
+        ReadTrainingDto CreateNewTraining(string Email);
+        ReadTrainingDto GetOldestTraining();
         void SaveFeedBack(CreateFeedbackDto dto);
-        FeedbackDto GetFeedbackByEmail(string email);
+        ReadFeedbackDto GetFeedbackByEmail(string email);
     }
 }

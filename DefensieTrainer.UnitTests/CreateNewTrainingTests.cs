@@ -31,7 +31,7 @@ namespace DefensieTrainer.UnitTests
             public void GenerateNewTrainingSession_ShouldReturnEmptyList_WhenTrainingsIsEmpty()
             {
                 //Act
-                var result = _trainingCreator.GenerateNewTrainingSession(new List<TrainingDto>());
+                var result = _trainingCreator.GenerateNewTrainingSession(new List<ReadTrainingDto>());
 
                 //Assert
                 Assert.IsNotNull(result);
@@ -42,11 +42,11 @@ namespace DefensieTrainer.UnitTests
             public void GenerateNewTrainingSession_ShouldGenerateNewTraining_WhenTrainingsAreProvided()
             {
                 //Arrange
-                var trainings = new List<TrainingDto>
+                var trainings = new List<ReadTrainingDto>
                 {
-                new TrainingDto { Id = 1, Amount = 1, TimeInSeconds = 600, Meters = 1000, ClusterId = 1, SortTraining = 1, PersonId = 1 },
-                new TrainingDto { Id = 2, Amount = 2, TimeInSeconds = 1200, Meters = 2000, ClusterId = 2, SortTraining = 1, PersonId = 1 },
-                new TrainingDto { Id = 3, Amount = 3, TimeInSeconds = 1800, Meters = 3000, ClusterId = 5, SortTraining = 1, PersonId = 1 }
+                new ReadTrainingDto { Id = 1, Amount = 1, TimeInSeconds = 600, Meters = 1000, ClusterId = 1, SortTraining = 1, PersonId = 1 },
+                new ReadTrainingDto { Id = 2, Amount = 2, TimeInSeconds = 1200, Meters = 2000, ClusterId = 2, SortTraining = 1, PersonId = 1 },
+                new ReadTrainingDto { Id = 3, Amount = 3, TimeInSeconds = 1800, Meters = 3000, ClusterId = 5, SortTraining = 1, PersonId = 1 }
                 };
 
                 //Act

@@ -13,7 +13,7 @@ namespace DefensieTrainer.Domain.Service
             _requirementRepository = requirementRepository;
         }
     
-        public void ChangeRequirement(RequirementDto requirementDto)
+        public void ChangeRequirement(ReadRequirementDto requirementDto)
         {
             _requirementRepository.UpdateRequirement(requirementDto);
         }
@@ -23,13 +23,13 @@ namespace DefensieTrainer.Domain.Service
             _requirementRepository.CreateRequirement(requirementDto);
         }
 
-        public List<RequirementDto> GetAllRequirements()
+        public List<ReadRequirementDto> GetAllRequirements()
         {
-            List<RequirementDto> requirements = new List<RequirementDto>();
+            List<ReadRequirementDto> requirements = new List<ReadRequirementDto>();
 
             foreach (var requirementDto in _requirementRepository.GetAllRequirements())
             {
-                RequirementDto requirement = new RequirementDto
+                ReadRequirementDto requirement = new ReadRequirementDto
                 {
                     ClusterId = requirementDto.ClusterId,
                     Name = requirementDto.Name,

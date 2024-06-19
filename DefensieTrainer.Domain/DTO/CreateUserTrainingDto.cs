@@ -1,6 +1,6 @@
 ﻿namespace DefensieTrainer.Domain.DTO
 {
-    public class UserTrainingInputDto
+    public class CreateUserTrainingDto
     {
         public int? ClusterId { get; set; }
         public int SortTraining { get; set; }

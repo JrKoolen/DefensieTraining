@@ -35,7 +35,7 @@ namespace DefensieTrainer.Controllers
         {
             if (ModelState.IsValid)
             {
-                PersonDto user = _userService.AuthenticateUser(model.Email, model.Password);
+                ReadPersonDto user = _userService.AuthenticateUser(model.Email, model.Password);
                 if (user != null)
                 {
                     var claims = new List<Claim>

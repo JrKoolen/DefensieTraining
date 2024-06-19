@@ -4,9 +4,9 @@ namespace DefensieTrainer.Domain.IServices
 {
     public interface IPersonService
     {
-        PersonDto AuthenticateUser(string email, string password);
-        PersonDto GetUserById(int userId);
-        IEnumerable<PersonDto> GetAllUsers();
+        ReadPersonDto AuthenticateUser(string email, string password);
+        ReadPersonDto GetUserById(int userId);
+        IEnumerable<ReadPersonDto> GetAllUsers();
         void CreateUser(CreatePersonDto userInput);
         void UpdateUserRole(string email, string role);
         void DeleteUser(int userId);

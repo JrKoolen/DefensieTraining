@@ -3,7 +3,7 @@ using DefensieTrainer.Domain.Enums;
 
 namespace DefensieTrainer.Domain.DTO
 {
-    public class PersonDto
+    public class ReadPersonDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

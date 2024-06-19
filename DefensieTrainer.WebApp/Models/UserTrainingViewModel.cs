@@ -27,9 +27,9 @@ namespace DefensieTrainer.WebApp.Models
         [Required]
         public bool NeedsFeedback { get; set; }
 
-        public UserTrainingInputDto ToDto()
+        public CreateUserTrainingDto ToDto()
         {
-            return new UserTrainingInputDto
+            return new CreateUserTrainingDto
             {
                 TimeInSeconds = this.TimeInSeconds,
                 SortTraining = this.SortTraining,

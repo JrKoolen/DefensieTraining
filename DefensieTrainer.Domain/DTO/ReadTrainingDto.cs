@@ -1,6 +1,6 @@
 ﻿namespace DefensieTrainer.Domain.DTO
 {
-    public class TrainingDto
+    public class ReadTrainingDto
     {
         public int Id { get; set; }
         public string? Name { get; set; }

@@ -7,23 +7,23 @@ namespace DefensieTrainer.Domain.Logica
 {
     public class TrainingCreator
     {
-        public List<TrainingDto> AllTrainings { get; set; }
-        public List<TrainingDto> AllRunningTrainings { get; set; }
-        public List<TrainingDto> AllSwimmingTrainings { get; set; }
+        public List<ReadTrainingDto> AllTrainings { get; set; }
+        public List<ReadTrainingDto> AllRunningTrainings { get; set; }
+        public List<ReadTrainingDto> AllSwimmingTrainings { get; set; }
 
         public TrainingCreator()
         {
-            AllTrainings = new List<TrainingDto>();
-            AllRunningTrainings = new List<TrainingDto>();
-            AllSwimmingTrainings = new List<TrainingDto>();
+            AllTrainings = new List<ReadTrainingDto>();
+            AllRunningTrainings = new List<ReadTrainingDto>();
+            AllSwimmingTrainings = new List<ReadTrainingDto>();
         }
 
-        public List<TrainingDto> CreateNewTraining(int mode)
+        public List<ReadTrainingDto> CreateNewTraining(int mode)
         {
             AllRunningTrainings.Clear();
             AllSwimmingTrainings.Clear();
 
-            foreach (TrainingDto training in AllTrainings)
+            foreach (ReadTrainingDto training in AllTrainings)
             {
                 if (training.SortTraining == 1)
                 {
@@ -38,14 +38,14 @@ namespace DefensieTrainer.Domain.Logica
             return mode == 1 ? GenerateNewTrainingSession(AllRunningTrainings) : GenerateNewTrainingSession(AllSwimmingTrainings);
         }
 
-        public List<TrainingDto> GenerateNewTrainingSession(List<TrainingDto> trainings)
+        public List<ReadTrainingDto> GenerateNewTrainingSession(List<ReadTrainingDto> trainings)
         {
-            if (trainings == null || trainings.Count == 0) return new List<TrainingDto>();
+            if (trainings == null || trainings.Count == 0) return new List<ReadTrainingDto>();
 
             var averageAmount = trainings.Average(t => t.Amount);
             var averageTime = trainings.Average(t => t.TimeInSeconds);
             var averageMeters = trainings.Average(t => t.Meters);
-            var newTraining = new TrainingDto
+            var newTraining = new ReadTrainingDto
             {
                 Id = trainings.Max(t => t.Id) + 1, 
                 Name = "New Training Session",
@@ -59,7 +59,7 @@ namespace DefensieTrainer.Domain.Logica
                 PersonId = trainings.First().PersonId, 
                 NeedsFeedback = false
             };
-            return new List<TrainingDto> { newTraining };
+            return new List<ReadTrainingDto> { newTraining };
         }
     }
 }

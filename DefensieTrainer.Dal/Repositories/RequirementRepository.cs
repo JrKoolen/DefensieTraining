@@ -66,9 +66,9 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public List<RequirementDto> GetAllRequirements()
+        public List<ReadRequirementDto> GetAllRequirements()
         {
-            List<RequirementDto> requirements = new List<RequirementDto>();
+            List<ReadRequirementDto> requirements = new List<ReadRequirementDto>();
 
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -80,7 +80,7 @@ namespace DefensieTrainer.Dal.Repositories
                     {
                         while (reader.Read())
                         {
-                            RequirementDto requirement = new RequirementDto
+                            ReadRequirementDto requirement = new ReadRequirementDto
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
@@ -98,7 +98,7 @@ namespace DefensieTrainer.Dal.Repositories
             return requirements;
         }
 
-        public RequirementDto GetById(int id)
+        public ReadRequirementDto GetById(int id)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -111,7 +111,7 @@ namespace DefensieTrainer.Dal.Repositories
                     {
                         if (reader.Read())
                         {
-                            RequirementDto requirement = new RequirementDto
+                            ReadRequirementDto requirement = new ReadRequirementDto
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"] == DBNull.Value ? null : reader["Name"].ToString(),
@@ -129,7 +129,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public void UpdateRequirement(RequirementDto requirement)
+        public void UpdateRequirement(ReadRequirementDto requirement)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {

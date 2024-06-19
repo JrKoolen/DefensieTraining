@@ -10,9 +10,9 @@ namespace DefensieTrainer.WebApp.Models
         public int ClusterLevel { get; set; }
         [Required]
         public string Description { get; set; }
-        public List<RequirementDto>? SelectedRequirements { get; set; }
+        public List<ReadRequirementDto>? SelectedRequirements { get; set; }
         public List<ClusterDto>? Clusters { get; set; }
-        public List<RequirementDto>? Requirements = new List<RequirementDto>();
+        public List<ReadRequirementDto>? Requirements = new List<ReadRequirementDto>();
 
         public CreateClusterDto ToDto()
         {

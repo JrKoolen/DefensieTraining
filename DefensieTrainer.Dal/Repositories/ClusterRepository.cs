@@ -33,7 +33,7 @@ namespace DefensieTrainer.Dal.Repositories
                     string insertRequirementsQuery = @"INSERT INTO Requirement (Cluster_id, Name, Description, SortTraining, TimeInSeconds)
                                                VALUES (@ClusterId, @Name, @Description, @SortTraining, @TimeInSeconds)";
 
-                    foreach (RequirementDto requirement in cluster.Requirements)
+                    foreach (ReadRequirementDto requirement in cluster.Requirements)
                     {
                         using (var insertRequirementCommand = new MySqlCommand(insertRequirementsQuery, connection))
                         {

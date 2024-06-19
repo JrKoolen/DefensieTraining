@@ -1,6 +1,6 @@
 ﻿namespace DefensieTrainer.Domain.DTO
 {
-    public class RequirementDto
+    public class ReadRequirementDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

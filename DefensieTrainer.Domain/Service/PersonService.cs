@@ -13,9 +13,9 @@ namespace DefensieTrainer.Domain.Service
         }
 
 
-        public PersonDto AuthenticateUser(string email, string password)
+        public ReadPersonDto AuthenticateUser(string email, string password)
         {
-            PersonDto user = _personRepository.GetUserByEmail(email);
+            ReadPersonDto user = _personRepository.GetUserByEmail(email);
             if (user != null && user.Password == password)
             {
                 return user;
@@ -30,17 +30,17 @@ namespace DefensieTrainer.Domain.Service
 
         public void DeleteUser(int userId)
         {
-            throw new NotImplementedException();
+            _personRepository.DeleteUser(userId);
         }
 
-        public IEnumerable<PersonDto> GetAllUsers()
+        public IEnumerable<ReadPersonDto> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return _personRepository.GetAllUsers();
         }
 
-        public PersonDto GetUserById(int userId)
+        public ReadPersonDto GetUserById(int userId)
         {
-            throw new NotImplementedException();
+            return _personRepository.GetById(userId);
         }
 
         public void UpdateUserRole(string email, string role)

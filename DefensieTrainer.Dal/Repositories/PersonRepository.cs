@@ -41,7 +41,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public PersonDto GetUserByEmail(string email)
+        public ReadPersonDto GetUserByEmail(string email)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -54,7 +54,7 @@ namespace DefensieTrainer.Dal.Repositories
                     {
                         if (reader.Read())
                         {
-                            return new PersonDto
+                            return new ReadPersonDto
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"].ToString(),
@@ -106,7 +106,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public List<PersonDto> GetAllUsers()
+        public List<ReadPersonDto> GetAllUsers()
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -118,10 +118,10 @@ namespace DefensieTrainer.Dal.Repositories
                 {
                     using (var reader = command.ExecuteReader())
                     {
-                        var users = new List<PersonDto>();
+                        var users = new List<ReadPersonDto>();
                         while (reader.Read())
                         {
-                            users.Add(new PersonDto
+                            users.Add(new ReadPersonDto
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"].ToString(),
@@ -139,7 +139,7 @@ namespace DefensieTrainer.Dal.Repositories
             }
         }
 
-        public PersonDto GetById(int id)
+        public ReadPersonDto GetById(int id)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -152,7 +152,7 @@ namespace DefensieTrainer.Dal.Repositories
                     {
                         if (reader.Read())
                         {
-                            return new PersonDto
+                            return new ReadPersonDto
                             {
                                 Id = Convert.ToInt32(reader["Id"]),
                                 Name = reader["Name"].ToString(),
