@@ -219,7 +219,7 @@ namespace DefensieTrainer.Dal.Repositories
             {
                 string query = @"
                 SELECT * 
-                ROM Training
+                FROM Training
                 WHERE NeedsFeedback = 1 
                 ORDER BY DateTime ASC 
                 LIMIT 1"; 

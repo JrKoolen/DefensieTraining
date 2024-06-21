@@ -98,11 +98,18 @@ namespace DefensieTrainer.WebApp.Controllers
         {
             string email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             ReadFeedbackDto dto = _trainingService.GetFeedbackByEmail(email);
-            var model = new FeedbackViewModel
+            var model = new FeedbackViewModel();
+            if (dto is null)
             {
-                Feedback = dto.Feedback
-            };
+                
+                return View("~/Views/User/Feedback.cshtml", model);
+            }
+            else
+            {
+                model.Feedback = dto.Feedback;
+            }
             return View("~/Views/User/Feedback.cshtml", model);
+
         }
     }
 

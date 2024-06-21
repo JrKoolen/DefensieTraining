@@ -2,6 +2,6 @@
 {
     public class FeedbackViewModel
     {
-        public string Feedback { get; set; }
+        public string? Feedback { get; set; }
     }
 }

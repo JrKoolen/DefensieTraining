@@ -12,12 +12,9 @@
 
             @if (Model.Feedback != null)
             {
-                <ul class="list-unstyled">
-                    @foreach (var feedback in Model.Feedback)
-                    {
-                        <li class="my-2">@feedback</li>
-                    }
-                </ul>
+                {
+                    <p class="my-2">@Model.Feedback</p>
+                }
             }
             else
             {

@@ -33,18 +33,18 @@ namespace DefensieTrainer.Dal.Repositories
                     string insertRequirementsQuery = @"INSERT INTO Requirement (Cluster_id, Name, Description, SortTraining, TimeInSeconds)
                                                VALUES (@ClusterId, @Name, @Description, @SortTraining, @TimeInSeconds)";
 
-                    foreach (ReadRequirementDto requirement in cluster.Requirements)
-                    {
-                        using (var insertRequirementCommand = new MySqlCommand(insertRequirementsQuery, connection))
-                        {
-                            insertRequirementCommand.Parameters.AddWithValue("@ClusterId", latestClusterId);
-                            insertRequirementCommand.Parameters.AddWithValue("@Name", requirement.Name);
-                            insertRequirementCommand.Parameters.AddWithValue("@Description", requirement.Description);
-                            insertRequirementCommand.Parameters.AddWithValue("@SortTraining", requirement.SortTraining);
-                            insertRequirementCommand.Parameters.AddWithValue("@TimeInSeconds", requirement.TimeInSeconds);
-                            insertRequirementCommand.ExecuteNonQuery();
-                        }
-                    }
+                //    foreach (ReadRequirementDto requirement in cluster.Requirements)
+                //    {
+                //        using (var insertRequirementCommand = new MySqlCommand(insertRequirementsQuery, connection))
+                //        {
+                //            insertRequirementCommand.Parameters.AddWithValue("@ClusterId", latestClusterId);
+                //            insertRequirementCommand.Parameters.AddWithValue("@Name", requirement.Name);
+                //            insertRequirementCommand.Parameters.AddWithValue("@Description", requirement.Description);
+                //            insertRequirementCommand.Parameters.AddWithValue("@SortTraining", requirement.SortTraining);
+                //            insertRequirementCommand.Parameters.AddWithValue("@TimeInSeconds", requirement.TimeInSeconds);
+                //            insertRequirementCommand.ExecuteNonQuery();
+                //        }
+                    //}
                 }
             }
         }
